@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from vkusnooo_app.models import Recipe
-from vkusnooo_app.recipe_forms import RecipeForm
+from vkusnooo_app.forms import RecipeForm
 
 
 def index(request):
@@ -20,13 +20,15 @@ def index(request):
 
 def create_recipe(request):
     if request.method == 'GET':
+
         context = {
             'form': RecipeForm(),
+            'recipe': Recipe.objects.all()
         }
 
         return render(request, 'create.html', context)
     else:
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('index')
@@ -49,7 +51,7 @@ def edit_recipe(request, pk):
 
         return render(request, 'edit.html', context)
     else:
-        form = RecipeForm(request.POST, instance=recipe)
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid():
             form.save()
             return redirect('index')

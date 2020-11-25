@@ -4,21 +4,121 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>ВкуснОоо! Вкусотийки в чинийки!</title>
+    <title>ВкуснОоо! Вкусотийки в чинийки!</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
-  <!-- Custom fonts for this template -->
-  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+          rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="{% static 'css/one-page-wonder.min.css'%}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/one-page-wonder.min.css' %}" rel="stylesheet">
 
 </head>
+
+<body>
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
+        <img src="{% static 'img/vkusno3.jpg' %}" width="40" height="40" class="d-inline-block align-top" alt=""
+             loading="lazy">
+        <a class="navbar-brand" href="#">ВкуснОоо!</a>
+        <a class="navbar-brand" href="#">Вкусотийки в чинийки!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Create Recipe <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign In</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="masthead text-center text-white">
+    <div class="masthead-content">
+
+        <div class="items-container">
+            <div class="item">
+                <form class="col-lg-6 offset-lg-3" method="post" enctype="multipart/form-data"
+                      action="{% url 'create recipe' %}>
+
+                    {% csrf_token %}
+                <div class="form-group">
+
+                <label for="title">Title</label>
+                <input type="text" class="form-control"
+                       placeholder="Name me!">
+
+                <label for="type">Type</label>
+                <select class="form-control" id="inlineFormCustomSelect" name="recipe_type">
+                    <option value={{ form.type }}></option>
+                </select>
+
+                <label for="{{ form.ingredients }}">Ingredients</label>
+                <textarea class="form-control" id='ingredients'
+                          placeholder="What ingredients I need?"></textarea>
+
+
+                <label for="description">Description</label>
+                <textarea class="form-control" id='{{ form.description }}'
+                          placeholder="Tell me how to cook it!"></textarea>
+
+
+                <label for="photo">Photo</label>
+                <input type="file" class="form-control-file" id='{{ form.photo }}'>
+
+
+                <label for="video">Video</label>
+                <input type="file" class="form-control-file" id='{{ form.video }}'>
+
+
+                <label for="Time">Time (Minutes)</label>
+                <input type="number" class="form-control">
+
+                <a href="#" class="btn btn-primary btn-lg rounded-pill mt-5">Create</a>
+                </form>
+            </div>
+        </div>
+</header>
+
+<!-- Footer -->
+<footer class="py-5 bg-black">
+    <div class="container">
+        <p class="m-0 text-center text-white small">Copyright &copy; ВкуснОоо! Вкусотийки в чинийки! 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

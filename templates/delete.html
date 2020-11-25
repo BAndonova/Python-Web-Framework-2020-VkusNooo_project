@@ -1,29 +1,61 @@
-{% extends 'common/base/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block site_heading %}
-    Delete Recipe
-{% endblock %}
+<head>
 
-{% block site_content %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <form class="col-lg-6 offset-lg-3" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="name">Name</label>
-            {{ form.name }}
+    <title>ВкуснОоо! Вкусотийки в чинийки!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/one-page-wonder.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
+        <img src="{% static 'img/vkusno3.jpg' %}" width="40" height="40" class="d-inline-block align-top" alt=""
+             loading="lazy">
+        <a class="navbar-brand" href="#">ВкуснОоо!</a>
+        <a class="navbar-brand" href="#">Вкусотийки в чинийки!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Delete Recipe <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign In</a>
+                </li>
+            </ul>
         </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            {{ form.description }}
-        </div>
-        <div class="custom-file">
-            <label class="custom-file-label" for="image">Choose Image File</label>
-            {{ form.image }}
-        </div>
-
-        <input type="submit" value="Delete" class="btn btn-primary mt-3">
-    </form>
-
-{% endblock %}
-
-
+    </div>
+</nav>

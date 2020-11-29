@@ -43,10 +43,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Delete Recipe <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Create Recipe <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item">
@@ -59,3 +59,68 @@
         </div>
     </div>
 </nav>
+
+<header class="masthead text-center text-white">
+    <div class="masthead-content">
+        <h1 class="masthead-subheading">ВкуснОоо! Create Recipe</h1>
+        <div class="items-container">
+            <div class="item">
+                <form class="col-lg-6 offset-lg-3" method="post" enctype="multipart/form-data"
+                      action="{% url 'delete recipe' recipe.id %}">
+
+                    {% csrf_token %}
+
+                    {#                <div class=" form-group">#}
+
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control"
+                           placeholder="Name me!">
+
+                    <label for="type">Type</label>
+                    <select class="form-control" id="inlineFormCustomSelect" name="recipe_type">
+                        <option value={{ form.type }}></option>
+                    </select>
+
+                    <label for="ingredients">Ingredients</label>
+                    <textarea class="form-control" id='ingredients'
+                              placeholder="What ingredients I need?"></textarea>
+
+
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id='{{ form.description }}'
+                              placeholder="Tell me how to cook it!"></textarea>
+
+
+                    <label for="photo">Photo</label>
+                    <input type="file" class="form-control-file" id='{{ form.photo }}'>
+
+
+                    <label for="video">Video</label>
+                    <input type="file" class="form-control-file" id='{{ form.video }}'>
+
+
+                    <label for="Time">Time (Minutes)</label>
+                    <input type="number" class="form-control">
+                    {#            </div>#}
+                    <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5" value="Delete">
+                    {#            <a href="#" class="btn btn-primary btn-lg rounded-pill mt-5">Delete</a>#}
+                </form>
+            </div>
+        </div>
+</header>
+
+<!-- Footer -->
+<footer class="py-5 bg-black">
+    <div class="container">
+        <p class="m-0 text-center text-white small">Copyright &copy; ВкуснОоо! Вкусотийки в чинийки! 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

@@ -18,19 +18,32 @@ def index(request):
         return render(request, 'index.html')
 
 
+def recipes(request):
+    if Recipe.objects.exists():
+        recipes = Recipe.objects.all()
+        recipes_count = recipes.count()
+        context = {
+            'recipes': recipes,
+            'recipes_count': recipes_count
+        }
+
+        return render(request, 'all_recipes.html', context)
+    else:
+        return redirect('index.html')
+
+
 def create_recipe(request):
     if request.method == 'GET':
-
         context = {
             'form': RecipeForm(),
-            'recipe': Recipe.objects.all()
         }
 
         return render(request, 'create.html', context)
     else:
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            recipe = form.save()
+            recipe.save()
             return redirect('index')
 
         context = {
@@ -66,13 +79,13 @@ def edit_recipe(request, pk):
 
 def details_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
-    ingr = recipe.ingredients.split(',')
+    # ingr = recipe.ingredients.split(',')
 
     if request.method == 'GET':
         context = {
             'form': RecipeForm(instance=recipe),
             'recipe': recipe,
-            'ingr': ingr
+            # 'ingr': ingr
         }
 
         return render(request, 'details.html', context)
@@ -91,3 +104,35 @@ def delete_recipe(request,pk):
     else:
         recipe.delete()
         return redirect('index')
+
+
+def desserts(request):
+    recipe = Recipe.objects.filter(type='Desserts')
+    context = {
+        'recipe': recipe,
+    }
+    return redirect(request, 'desserts.html', context)
+
+
+def meat_meals(args):
+    pass
+
+
+def meatless_meals(args):
+    pass
+
+
+def other(args):
+    pass
+
+
+def pasta_dough(args):
+    pass
+
+
+def vegan(args):
+    pass
+
+
+def healthy(args):
+    pass

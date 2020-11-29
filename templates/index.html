@@ -30,7 +30,8 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-        <img src="{% static 'img/vkusno3.jpg'%}" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
+        <img src="{% static 'img/vkusno3.jpg' %}" width="40" height="40" class="d-inline-block align-top" alt=""
+             loading="lazy">
         <a class="navbar-brand" href="#">ВкуснОоо!</a>
         <a class="navbar-brand" href="#">Вкусотийки в чинийки!</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -62,6 +63,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create recipe' %}">Create Recipe</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="#">Sign Up</a>
                 </li>
                 <li class="nav-item">
@@ -77,14 +82,14 @@
     <div class="masthead-content">
         <div class="container">
             {% block contents %}
-            <video name='video_vkusno' controls autoplay width='50%' height='40%'>
-                <source src="{{media}}/static/media/video_vkusno.mp4" type="video/mp4"></source>
-            </video>
+                <video name='video_vkusno' controls autoplay width='50%' height='40%'>
+                    <source src="{{ media }}/static/media/video_vkusno.mp4" type="video/mp4"></source>
+                </video>
             {% endblock %}
             <h1 class="masthead-heading mb-0">ВкуснОоо!</h1>
             <h2 class="masthead-subheading mb-0">Вкусотийки в чинийки!</h2>
 
-            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Learn More</a>
+            <a href="{% url 'all recipes' %}" class="btn btn-primary btn-xl rounded-pill mt-5">Learn More</a>
         </div>
     </div>
     <div class="bg-circle-1 bg-circle"></div>
@@ -94,65 +99,9 @@
 </header>
 
 
-<section>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 order-lg-2">
-                <div class="p-5">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/01.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 order-lg-1">
-                <div class="p-5">
-                    <h2 class="display-4">For those about to rock...</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit
-                        iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                        voluptatum molestiae adipisci, beatae obcaecati.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="p-5">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/02.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="p-5">
-                    <h2 class="display-4">We salute you!</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit
-                        iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                        voluptatum molestiae adipisci, beatae obcaecati.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 order-lg-2">
-                <div class="p-5">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/03.jpg' %}" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 order-lg-1">
-                <div class="p-5">
-                    <h2 class="display-4">Let there be rock!</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit
-                        iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                        voluptatum molestiae adipisci, beatae obcaecati.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- Footer -->
 <footer class="py-5 bg-black">

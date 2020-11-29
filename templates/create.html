@@ -43,7 +43,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Create Recipe <span class="sr-only">(current)</span></a>
@@ -62,14 +62,15 @@
 
 <header class="masthead text-center text-white">
     <div class="masthead-content">
-
+        <h1 class="masthead-subheading">ВкуснОоо! Create Recipe</h1>
         <div class="items-container">
             <div class="item">
                 <form class="col-lg-6 offset-lg-3" method="post" enctype="multipart/form-data"
                       action="{% url 'create recipe' %}>
 
                     {% csrf_token %}
-                <div class="form-group">
+
+{#                <div class=" form-group">#}
 
                 <label for="title">Title</label>
                 <input type="text" class="form-control"
@@ -80,7 +81,7 @@
                     <option value={{ form.type }}></option>
                 </select>
 
-                <label for="{{ form.ingredients }}">Ingredients</label>
+                <label for="ingredients">Ingredients</label>
                 <textarea class="form-control" id='ingredients'
                           placeholder="What ingredients I need?"></textarea>
 
@@ -100,11 +101,12 @@
 
                 <label for="Time">Time (Minutes)</label>
                 <input type="number" class="form-control">
+{#            </div>#}
 
-                <a href="#" class="btn btn-primary btn-lg rounded-pill mt-5">Create</a>
-                </form>
-            </div>
+            <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5" value="Create">
+            </form>
         </div>
+    </div>
 </header>
 
 <!-- Footer -->

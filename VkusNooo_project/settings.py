@@ -78,7 +78,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tasty_recipes',
         'USER': 'postgres',
-        'PASSWORD': 'qwe!@#'
+        'PASSWORD': 'qwe!@#',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+
     }
 }
 
@@ -120,6 +123,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     join(BASE_DIR, 'static'),
 )
+STATIC_ROOT = ''
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')

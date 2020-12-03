@@ -19,8 +19,8 @@ class Recipe(models.Model):
         (Desserts, 'Desserts'),
         (Other, 'Other'),
     )
-    type = models.CharField(max_length=20, choices=MEAL_TYPES, default='', blank=True)
-    title = models.CharField(max_length=30)
+    type = models.CharField(max_length=100, choices=MEAL_TYPES, default='', blank=False)
+    title = models.CharField(max_length=100)
     # image_url = models.URLField()
     description = models.TextField()
     ingredients = models.CharField(max_length=1000)

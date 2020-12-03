@@ -18,7 +18,7 @@ def index(request):
         return render(request, 'index.html')
 
 
-def recipes(request):
+def all_recipes(request):
     if Recipe.objects.exists():
         recipes = Recipe.objects.all()
         recipes_count = recipes.count()
@@ -79,13 +79,13 @@ def edit_recipe(request, pk):
 
 def details_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
-    # ingr = recipe.ingredients.split(',')
+    ingr = recipe.ingredients.split(',')
 
     if request.method == 'GET':
         context = {
             'form': RecipeForm(instance=recipe),
             'recipe': recipe,
-            # 'ingr': ingr
+            'ingr': ingr
         }
 
         return render(request, 'details.html', context)
@@ -111,28 +111,52 @@ def desserts(request):
     context = {
         'recipe': recipe,
     }
-    return redirect(request, 'desserts.html', context)
+    return render(request, 'meals/desserts.html', context)
 
 
-def meat_meals(args):
-    pass
+def meat_meals(request):
+    recipe = Recipe.objects.filter(type='Meat_Meals')
+    context = {
+        'recipe': recipe,
+    }
+    return render(request, 'meals/meat.html', context)
 
 
-def meatless_meals(args):
-    pass
+def meatless_meals(request):
+    recipe = Recipe.objects.filter(type='Meatless_Meals')
+    context = {
+        'recipe': recipe,
+    }
+    return render(request, 'meals/meatless.html', context)
 
 
-def other(args):
-    pass
+def other(request):
+    recipe = Recipe.objects.filter(type='Other')
+    context = {
+        'recipe': recipe,
+    }
+    return render(request, 'meals/other.html', context)
 
 
-def pasta_dough(args):
-    pass
+def pasta_dough(request):
+    recipe = Recipe.objects.filter(type='Pasta_and_Dough')
+    context = {
+        'recipe': recipe,
+    }
+    return render(request, 'meals/pasta_and_dough.html', context)
 
 
-def vegan(args):
-    pass
+def vegan(request):
+    recipe = Recipe.objects.filter(type='Vegan')
+    context = {
+        'recipe': recipe,
+    }
+    return render(request, 'meals/vegan.html', context)
 
 
-def healthy(args):
-    pass
+def healthy(request):
+    recipe = Recipe.objects.filter(type='Healthy_and_Dietetic')
+    context = {
+        'recipe': recipe,
+    }
+    return render(request, 'meals/healthy.html', context)

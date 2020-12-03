@@ -1,10 +1,70 @@
+{% extends 'partials/base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
+
+{% block site_content %}
+
+    {#<header class="masthead text-center text-white">#}
+    {#    <div class="masthead-content">#}
+    {##}
+    {#        <h1 class="masthead-subheading">ВкуснОоо! / Create Recipe</h1>#}
+    {#        <div class="items-container">#}
+    <h1 class="masthead-subheading" align="center">Recipe Details</h1>
+    <div class="d-inline p-52 w-50" align="justify">
+        {#        <div class="d-flex align-items-baseline">#}
+        <h2 class="masthead-subheading" align="center">{{ recipe.title }}</h2>
+        {% if recipe.photo %}
+            <img src=”{{ recipe.photo.url }} class="img-fluid img-thumbnail" align="center">
+        {% else %}
+            <img src="{% static 'img/vkusno3.jpg' %}" class="img-fluid img-thumbnail" align="center">
+        {% endif %}
+        {#            <img class="img-fluid" src="{{ recipe.photo.url }}" alt="recipe-image">#}
+        <div class="time" align="center">
+            <img src="{% static 'img/cooking time.png' %}" width="40" height="40"
+                 class="d-inline-block align-top">
+            {{ recipe.time }} min
+        </div>
+        <h3 class="masthead-subheading" align="center">What Ingredients I Need?</h3>
+        <ul class="text-justify">
+            {% for i in ingr %}
+
+                <li>{{ i }}</li>
+
+            {% endfor %}
+        </ul>
+        <h3 class="masthead-subheading" align="center">How to prepare?</h3>
+        <div class="recipe-info-full">
+            {{ recipe.description }}
+        </div>
+        <div class="buttons-container">
+            <a href="{% url 'edit recipe' recipe.pk %}" class="btn btn-primary btn-lg rounded-pill mt-5">Edit</a>
+            <a href="{% url 'delete recipe' recipe.pk %}"
+               class="btn btn-primary btn-lg rounded-pill mt-5">Delete</a>
+            {#                <a href="{% url '' recipe.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>#}
+            {#                <p class="mt-2">Likes: {{ pet.like_set.count }}</p>#}
+        </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </header>
+
+{% endblock %}
+<!-- Footer -->
+<footer class="py-5 bg-black">
+    <div class="container">
+        <p class="m-0 text-center text-white small">Copyright &copy; ВкуснОоо! Вкусотийки в чинийки! 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+
 </html>

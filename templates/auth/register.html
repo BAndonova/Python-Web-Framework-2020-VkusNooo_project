@@ -1,0 +1,8 @@
+{% extends 'partials/base.html' %}
+{% block site_content %}
+    <form method="POST" action="{% url 'register user' %}">
+        {% csrf_token %}
+        {{ form }}
+    <a href="{% url 'register user' %}" class="btn btn-primary btn-lg rounded-pill mt-5">Register</a>
+    </form>
+{% endblock %}

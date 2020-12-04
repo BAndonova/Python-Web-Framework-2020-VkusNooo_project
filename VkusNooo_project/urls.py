@@ -21,6 +21,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('vkusnooo_app.urls'))
-] + static(settings.MEDIA_URL, document_root=MEDIA_ROOT) + staticfiles_urlpatterns()
+                  path('admin/', admin.site.urls),
+                  path('', include('vkusnooo_app.urls')),
+                  path('auth/', include('vkusnooo_auth.urls')),
+              ] + static(settings.MEDIA_URL, document_root=MEDIA_ROOT) + staticfiles_urlpatterns()

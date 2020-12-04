@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'vkusnooo_app',
     'embed_video',
+    'vkusnooo_auth',
 ]
 
 MIDDLEWARE = [

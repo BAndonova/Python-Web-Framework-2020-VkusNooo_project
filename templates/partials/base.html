@@ -3,9 +3,13 @@
 <html lang="en">
 
 
-{%include 'partials/header.html'%}
+{% include 'partials/header.html' %}
+{% block title %}
+{#    <title>ВкуснОоо! Вкусотийки в чинийки!</title>#}
+{% endblock %}
 
 {% include 'partials/nav.html' %}
+
 
 {% block site_content %}
 {% endblock %}
@@ -13,6 +17,6 @@
 <!-- Footer -->
 
 {% include 'partials/footer.html' %}
-</body>
+
 
 </html>

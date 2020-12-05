@@ -44,11 +44,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link {% if current_page == 'Home' %} active {% endif %}" href="{% url 'index' %}">Home
+                        <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                    <a class="nav-link dropdown-toggle{% if current_page == 'Recipes' %} active {% endif %}" href="#"
+                       id="navbarDropdownMenuLink"
                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Categories
                     </a>
@@ -64,18 +66,29 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'create recipe' %}">Create Recipe</a>
+                    <a class="nav-link {% if current_page == 'create' %} active {% endif %}"
+                       href="{% url 'create recipe' %}">Create Recipe</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register user' %}">Sign Up</a>
+                    <a class="nav-link {% if current_page == 'auth/register' %} active {% endif %}"
+                       href="{% url 'register user' %}">Sign Up</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login view' %}">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout view' %}">Logout</a>
-                </li>
+
+{#                <div class="nav-item">#}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout view' %}">Welcome, {{ user.username }}! Sign
+                                Out</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login view' %}">Sign In</a>
+                        </li>
+                    {% endif %}
+
+{#                </div>#}
+
             </ul>
         </div>
     </div>
@@ -114,7 +127,7 @@
                 <div class="p-5">
                     <h2 class="display-4">Our Recipes are {{ recipes_count }}</h2>
                     <p>Our recipes portfolio is constantly increasing. Currently we provide huge number
-                         and variety of recipes. Check them out!
+                        and variety of recipes. Check them out!
                     </p>
                     <a href="{% url 'all recipes' %}" class="btn btn-primary btn-lg rounded-pill mt-5">Learn
                         More</a>
@@ -134,12 +147,12 @@
             </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
-                    <h2 class="display-4">Happy Users!</h2>
+                    <h2 class="display-4">Happy Members!</h2>
                     <p>The main force of the site are our users. The people love cooking increasing. Those are
                         the people sharing their experience and favourite recipes making the rest of the users
-                        happy!
+                        happy! {{ profiles.count}}
                     </p>
-                    <a href="{% url 'desserts' %}" class="btn btn-primary btn-lg rounded-pill mt-5">Learn
+                    <a href="{% url 'all recipes' %}" class="btn btn-primary btn-lg rounded-pill mt-5">Learn
                         More</a>
                 </div>
             </div>
@@ -147,27 +160,27 @@
     </div>
 </section>
 
-<section>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="p-5">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/cocktail-food.jpg' %}" alt="other">
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="p-5">
-                    <h2 class="display-4">Other Recipes</h2>
-                    <p>Maybe you were not able to find a recipe in the previous categories. Check this one!
-                        A variety of recipes not only food! This is amazing!
-                    </p>
-                    <a href="{% url 'other' %}" class="btn btn-primary btn-lg rounded-pill mt-5">Learn
-                        More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+{#<section>#}
+{#    <div class="container">#}
+{#        <div class="row align-items-center">#}
+{#            <div class="col-lg-6">#}
+{#                <div class="p-5">#}
+{#                    <img class="img-fluid rounded-circle" src="{% static 'img/cocktail-food.jpg' %}" alt="other">#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-lg-6">#}
+{#                <div class="p-5">#}
+{#                    <h2 class="display-4">Other Recipes</h2>#}
+{#                    <p>Maybe you were not able to find a recipe in the previous categories. Check this one!#}
+{#                        A variety of recipes not only food! This is amazing!#}
+{#                    </p>#}
+{#                    <a href="{% url 'other' %}" class="btn btn-primary btn-lg rounded-pill mt-5">Learn#}
+{#                        More</a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 
 
 <!-- Footer -->

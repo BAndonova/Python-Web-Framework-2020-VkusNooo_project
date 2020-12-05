@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from recipe_core.decorators import group_required
 from vkusnooo_app.models import Recipe
 from vkusnooo_app.forms import RecipeForm
 
@@ -31,11 +33,18 @@ def all_recipes(request):
     else:
         return redirect('index.html')
 
-
+@login_required
+# @group_required(groups=['Regular Users'])
 def create_recipe(request):
     if request.method == 'GET':
+        # recipes = Recipe.objects.all()
+        # for rec in recipes:
+        #     rec.image_url = rec.image.url[len('pictures'):]
         context = {
+            # 'recipes': recipes
             'form': RecipeForm(),
+            'current_page': 'create',
+            # 'show_delete': recipe.user == request.user
         }
 
         return render(request, 'create.html', context)
@@ -43,6 +52,7 @@ def create_recipe(request):
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             recipe = form.save()
+            # recipe.user = request.user
             recipe.save()
             return redirect('index')
 

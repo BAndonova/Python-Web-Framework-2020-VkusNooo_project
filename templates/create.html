@@ -50,9 +50,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Sign Up</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign In</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout view' %}">Welcome, {{ user.username }}! Sign
+                            Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login view' %}">Sign In</a>
+                    </li>
+                {% endif %}
+
             </ul>
         </div>
     </div>
@@ -65,12 +73,12 @@
         <div class="items-container">
 
             <div class="item">
-
+                {% load bootstrap4 %}
                 <form class="col-lg-6 offset-lg-3" method="POST" enctype="multipart/form-data"
                       action="{% url 'create recipe' %}">
 
                     {% csrf_token %}
-                    {{ form }}
+                    {% bootstrap_form form %}
                     {% comment %}
                     <div class="form-group">
                         <label for="name">Title</label>
@@ -157,6 +165,12 @@
                 </form>
             </div>
         </div>
+
+        <div class="bg-circle-1 bg-circle"></div>
+        <div class="bg-circle-2 bg-circle"></div>
+        <div class="bg-circle-3 bg-circle"></div>
+        {#            <div class="bg-circle-4 bg-circle"></div>#}
+
 </header>
 
 

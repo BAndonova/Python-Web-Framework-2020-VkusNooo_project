@@ -7,7 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ВкуснОоо! Вкусотийки в чинийки!</title>
+    {% block title %}
+{#    <title>ВкуснОоо! Вкусотийки в чинийки!</title>#}
+    {% endblock %}
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -26,13 +28,13 @@
 <header class="masthead text-center text-white">
     <div class="masthead-content">
         <div class="container">
-            {#                    {% block content %}#}
+                                {% block nav_video %}
             {#                        <video name='video_vkusno' controls autoplay width='50%' height='40%'>#}
             {#                            <source src="{{ media }}/static/media/video_vkusno.mp4" type="video/mp4"></source>#}
             {#                        </video>#}
-            {#                    {% endblock %}#}
+                                {% endblock %}
 
-            {% block heading %}
+            {% block heading_title %}
                 <h1 class="masthead-heading mb-0">ВкуснОоо!</h1>
                 <h2 class="masthead-subheading mb-0">Вкусотийки в чинийки!</h2>
 
@@ -45,4 +47,5 @@
     <div class="bg-circle-2 bg-circle"></div>
     <div class="bg-circle-3 bg-circle"></div>
     <div class="bg-circle-4 bg-circle"></div>
+
 </header>

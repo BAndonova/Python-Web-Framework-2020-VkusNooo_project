@@ -23,7 +23,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=100)
     # image_url = models.URLField()
     description = models.TextField()
-    ingredients = models.CharField(max_length=1000)
+    ingredients = models.CharField(max_length=10000)
     photo = models.ImageField(upload_to='pictures', blank=True)
     video = models.ImageField(upload_to='videos', blank=True)
     time = models.IntegerField()

@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'vkusnooo_app',
     'embed_video',
     'vkusnooo_auth',
+    'bootstrap4',
+    'recipe_core',
+    'crispy_forms',
 ]
+
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,3 +138,5 @@ STATIC_ROOT = ''
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
+
+LOGIN_URL = '/auth/login/'

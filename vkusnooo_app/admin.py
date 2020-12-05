@@ -5,3 +5,4 @@ from vkusnooo_app.models import Recipe, Like
 
 admin.site.register(Recipe)
 admin.site.register(Like)
+

@@ -1,0 +1,31 @@
+{% extends 'partials/base.html' %}
+{% block title %}
+    <title>ВкуснОоо! Вкусотийки в чинийки!|Sign In</title>
+{% endblock %}
+
+{% load bootstrap4 %}
+
+{% block site_content %}
+    <h1 class="text-center text-dark">Sign Me Up</h1>
+    <div class="row d-flex justify-content-center">
+        <form method="POST" action="{% url 'login view' %}" enctype="multipart/form-data">
+            <input type="hidden" name="return_url" value="{{ request.GET.next }}"/>
+            {% csrf_token %}
+            {% for field in login_form %}
+                {% bootstrap_field field %}
+            {% endfor %}
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5" value="Sign Me In">
+            </div>
+            <div class="form-group">
+
+               <p class="alert-dismissible">Or register here:
+                   <a href="{% url 'register user' %}?next={{ request.GET.next }}"
+                      class="btn btn-primary btn-sm rounded-pill mt-sm-n1">
+                   Sign Me Up</a></p>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

@@ -10,6 +10,9 @@ def index(request):
     if Recipe.objects.exists():
         recipes = Recipe.objects.all()
         recipes_count = recipes.count()
+        for recipe in recipes:
+            recipe.can_delete = recipe.created_by_id == request.user.id
+
         context = {
             'recipes': recipes,
             'recipes_count': recipes_count
@@ -32,6 +35,7 @@ def all_recipes(request):
         return render(request, 'all_recipes.html', context)
     else:
         return redirect('index.html')
+
 
 @login_required
 # @group_required(groups=['Regular Users'])
@@ -63,6 +67,7 @@ def create_recipe(request):
         return render(request, 'create.html', context)
 
 
+@login_required
 def edit_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
 
@@ -91,6 +96,8 @@ def details_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
     ingr = recipe.ingredients.split(',')
 
+    recipe.can_delete = recipe.created_by_id == request.user.id
+
     if request.method == 'GET':
         context = {
             'form': RecipeForm(instance=recipe),
@@ -101,7 +108,8 @@ def details_recipe(request, pk):
         return render(request, 'details.html', context)
 
 
-def delete_recipe(request,pk):
+@login_required
+def delete_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
 
     if request.method == 'GET':
@@ -125,7 +133,7 @@ def desserts(request):
 
 
 def meat_meals(request):
-    recipe = Recipe.objects.filter(type='Meat_Meals')
+    recipe = Recipe.objects.filter(type='Meat Meals')
     context = {
         'recipe': recipe,
     }
@@ -133,7 +141,7 @@ def meat_meals(request):
 
 
 def meatless_meals(request):
-    recipe = Recipe.objects.filter(type='Meatless_Meals')
+    recipe = Recipe.objects.filter(type='Meatless Meals')
     context = {
         'recipe': recipe,
     }
@@ -149,7 +157,7 @@ def other(request):
 
 
 def pasta_dough(request):
-    recipe = Recipe.objects.filter(type='Pasta_and_Dough')
+    recipe = Recipe.objects.filter(type='Pasta and Dough')
     context = {
         'recipe': recipe,
     }
@@ -165,7 +173,7 @@ def vegan(request):
 
 
 def healthy(request):
-    recipe = Recipe.objects.filter(type='Healthy_and_Dietetic')
+    recipe = Recipe.objects.filter(type='Healthy and Dietetic')
     context = {
         'recipe': recipe,
     }

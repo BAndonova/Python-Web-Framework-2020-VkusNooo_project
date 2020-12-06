@@ -1,5 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
 from embed_video.fields import EmbedVideoField
+
+from vkusnooo_auth.models import UserProfile
 
 
 class Recipe(models.Model):
@@ -27,7 +30,9 @@ class Recipe(models.Model):
     photo = models.ImageField(upload_to='pictures', blank=True)
     video = models.ImageField(upload_to='videos', blank=True)
     time = models.IntegerField()
-    # likes = models.ManyToManyField(to=Recipe)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return f'{self.id}; {self.title}; {self.time}'
@@ -36,8 +41,10 @@ class Recipe(models.Model):
 class Like(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     test = models.CharField(max_length=2)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     text = models.TextField(blank=False)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)

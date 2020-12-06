@@ -16,6 +16,7 @@ class RecipeForm(forms.ModelForm):
         #     'time': forms.IntegerField(attrs={'class': 'custom-file-input'}),
         # }
         fields = '__all__'
+        # exclude = ('created_by', 'User', 'user')
 
 
 class CommentForm(forms.Form):

@@ -1,7 +1,7 @@
 from django.urls import path
 
 from vkusnooo_app.views import index, create_recipe, edit_recipe, details_recipe, delete_recipe, desserts, meat_meals, \
-    meatless_meals, other, pasta_dough, vegan, healthy, all_recipes
+    meatless_meals, other, pasta_dough, vegan, healthy, all_recipes, like_recipe
 
 urlpatterns = [
     path('', index, name='index'),
@@ -17,4 +17,5 @@ urlpatterns = [
     path('pasta/', pasta_dough, name='pasta and dough'),
     path('vegan/', vegan, name='vegan'),
     path('healthy/', healthy, name='healthy and dietetic'),
+    path('like/<int:pk>/', like_recipe, name='like recipe'),
 ]

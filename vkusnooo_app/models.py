@@ -30,18 +30,26 @@ class Recipe(models.Model):
     photo = models.ImageField(upload_to='pictures', blank=True)
     video = models.ImageField(upload_to='videos', blank=True)
     time = models.IntegerField()
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    # user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, default=User)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=User)
+    # liked = models.ManyToManyField(UserProfile, blank=True, related_name='liked')
 
     def __str__(self):
         return f'{self.id}; {self.title}; {self.time}'
 
+    @property
+    def likes_count(self):
+        return self.liked.all().count()
+
 
 class Like(models.Model):
+    LIKE_CHOICES = (
+        ('Like', 'Like'),
+        ('Dislike', 'Dislike'),
+    )
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    test = models.CharField(max_length=2)
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    test = models.CharField(choices=LIKE_CHOICES, default=None, max_length=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):

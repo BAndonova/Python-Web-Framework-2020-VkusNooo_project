@@ -1,58 +1,70 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% load bootstrap4 %}
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 {% block site_content %}
 
     <h1 class="masthead-subheading text-dark text-center">Recipe Details</h1>
     <div class="d-inline p-52 w-50 text-center align-content-center">
-    {#        <div class="d-flex align-items-baseline">#}
-    <h2 class="masthead-subheading text-dark text-center">Recipe Name: {{ recipe.title }}</h2>
+        {#        <div class="d-flex align-items-baseline">#}
+        <h2 class="masthead-subheading text-dark text-center">Recipe Name: {{ recipe.title }}</h2>
 
-    {% if recipe.photo %}
-        <img class="card-img-top" src=”{{ recipe.photo.url }}" style="width: 20%; height: 20%" alt="Recipe Image">
-    {% else %}
-        <img class="card-img align-items-center" src="{% static 'img/vkusno3.jpg' %}"
-             style="width: 20%; height: 20%"
-             alt="No image">
-    {% endif %}
-
-    <div class="time" align="center">
-        <img src="{% static 'img/cooking time.png' %}" width="40" height="40"
-             class="d-inline-block align-top">
-        {{ recipe.time }} min
-    </div>
-    <h3 class="masthead-subheading text-dark text-center">What Ingredients I Need?</h3>
-    <ul class="text-justify">
-        {% for i in ingr %}
-
-            <li>{{ i }}</li>
-
-        {% endfor %}
-    </ul>
-    <h3 class="masthead-subheading text-dark text-center">How to prepare?</h3>
-    <div class="text-center">
-        {{ recipe.description }}
-    </div>
-
-    {% if video %}
-    <div class="masthead-subheading text-dark text-center">
-        <video name='recipe video' controls autoplay width='50%' height='40%'>
-            <source src="{{ videos }}/media/videos/ {{ recipe.pk }}" type="video/mp4"></source>
-        </video>
-    </div>
+        {% if recipe.photo %}
+            <img class="card-img-top" src="{{ recipe.photo.url }}" style="width: 20%; height: 20%" alt="Recipe Image">
         {% else %}
-        <h3 class="masthead-subheading text-dark text-center"> No video is available for this recipe!</h3>
+            <img class="card-img align-items-center" src="{% static 'img/vkusno3.jpg' %}"
+                 style="width: 20%; height: 20%"
+                 alt="No image">
+        {% endif %}
+
+        <div class="time" align="center">
+            <img src="{% static 'img/cooking time.png' %}" width="40" height="40"
+                 class="d-inline-block align-top">
+            {{ recipe.time }} min
+        </div>
+        <h3 class="masthead-subheading text-dark text-center">What Ingredients I Need?</h3>
+        <ul class="text-justify">
+            {% for i in ingr %}
+
+                <li>{{ i }}</li>
+
+            {% endfor %}
+        </ul>
+        <h3 class="masthead-subheading text-dark text-center">How to prepare?</h3>
+        <div class="text-center">
+            {{ recipe.description }}
+        </div>
+
+        {% if recipe.video %}
+            <div class="masthead-subheading text-dark text-center">
+                <h3 class="masthead-subheading text-dark text-center"> Video:</h3>
+                <video name='recipe video' controls autoplay width='50%' height='40%'>
+                    <source src="{{ recipe.video }}" type="video/mp4">Video</source>
+                </video>
+            </div>
+        {% else %}
+            <h3 class="masthead-subheading text-dark text-center"> Video:</h3>
+            <p class="masthead-subheading text-dark text-center"> We are sorry, no video is available for this
+                recipe!</p>
+        {% endif %}
+    </div>
+
+    {% if can_like %}
+        {% if has_liked %}
+            <button class="ui button negative" action="{% url 'like recipe' recipe.id %}">Unlike</button>
+        {% else %}
+            <button class="ui button positive" action="{% url 'like recipe' recipe.id %}">Like</button>
+        {% endif %}
     {% endif %}
+    <p class="mt-2">Likes: {{ recipe.like_set.count }}</p>
+    </div>
 
     {% if recipe.can_delete %}
         <div class="buttons-container">
             <a href="{% url 'edit recipe' recipe.pk %}" class="btn btn-primary btn-lg rounded-pill mt-5">Edit</a>
             <a href="{% url 'delete recipe' recipe.pk %}"
                class="btn btn-primary btn-lg rounded-pill mt-5">Delete</a>
-            {#                            <a href="{% url '' recipe.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>#}
-            {#                            <p class="mt-2">Likes: {{ pet.like_set.count }}</p>#}
-        </div>
+                    </div>
     {% endif %}
 
 {% endblock %}

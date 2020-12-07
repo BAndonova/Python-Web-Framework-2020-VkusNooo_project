@@ -100,7 +100,7 @@
         <div class="container">
             {% block contents %}
                 <video name='video_vkusno' controls autoplay width='50%' height='40%'>
-                    <source src="{{ media }}/static/media/video_vkusno.mp4" type="video/mp4"></source>
+                    <source src="{{ initial_media }}/static/initial_media/video_vkusno.mp4" type="video/mp4"></source>
                 </video>
             {% endblock %}
             <h1 class="masthead-heading mb-0">ВкуснОоо!</h1>
@@ -150,7 +150,7 @@
                     <h2 class="display-4">Happy Members!</h2>
                     <p>The main force of the site are our users. The people love cooking increasing. Those are
                         the people sharing their experience and favourite recipes making the rest of the users
-                        happy! {{ profiles.count}}
+                        happy! {{ users_count }}
                     </p>
                     <a href="{% url 'all recipes' %}" class="btn btn-primary btn-lg rounded-pill mt-5">Learn
                         More</a>

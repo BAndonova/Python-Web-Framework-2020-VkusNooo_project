@@ -23,7 +23,8 @@
                 <h5 class="card-title">{{ rec.title }}</h5>
                 <p class="card-text"> <img src="{% static 'img/cooking time.png' %}" width="40" height="40"
              class="d-inline-block align-top">Total Time needed: {{ rec.time }} (min)</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <p class="card-text"> Created By: {{ rec.user.user.username }}.</p>
+                <a href="#" class="btn btn-primary">See Details</a>
             </div>
         </div>
 

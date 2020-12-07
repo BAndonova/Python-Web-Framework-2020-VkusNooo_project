@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db import transaction
 # from django.shortcuts import render
 from django.contrib.auth import logout, authenticate, login
@@ -72,3 +73,22 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('index')
+
+
+def user_profile(request, pk=None):
+    user = request.user if pk is None else User.objects.get(pk=pk)
+    if request.method == 'GET':
+        context ={
+            'profile_user': user,
+            'profile': user.userprofile,
+            'recipes': user.userprofile.recipe_set.all(),
+            'form': ProfileForm(),
+        }
+        return render(request, 'auth/user_profile.html', context)
+    else:
+        form = ProfileForm(request.POST, request.FILES, instance=user.userprofile)
+        if form.is_valid():
+            form.save()
+            return redirect('current user profile')
+
+        return redirect('current user profile')

@@ -79,85 +79,6 @@
 
                     {% csrf_token %}
                     {% bootstrap_form form %}
-                    {% comment %}
-                    <div class="form-group">
-                        <label for="name">Title</label>
-                        {{ form.title }}
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Type</label>
-                        {{ form.type }}
-                    </div>
-                    <div class="form-group">
-                        <label for="ingr">Ingredients</label>
-                        {{ form.ingredients }}
-                    </div>
-                    <div class="form-group">
-                        <label for="descr">Description</label>
-                        {{ form.description }}
-                    </div>
-                    <div class="custom-file">
-                        <label class="custom-file-label" for="image">Upload Photo</label>
-                        {{ form.photo }}
-                    </div>
-                    <div class="custom-file">
-                        <label class="custom-file-label" for="image">Upload Video</label>
-                        {{ form.video }}
-                    </div>
-                    <div class="form-group">
-                        <label for="time">Time (Minutes)</label>
-                        {{ form.time }}
-                    </div>
-
-                    {% comment %}
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" placeholder="Name me!" form='{{ form.title }}'>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="type">Type</label>
-                        <select class="form-control" name="recipe_type" form='{{ form.title }}'>
-                            <option value=''>---------</option>
-                            <option value='Meat_Meals'>Meat Meals</option>
-                            <option value='Pasta_and_Dough'>Pasta and Dough</option>
-                            <option value='Meatless_Meals'>Meatless Meals</option>
-                            <option value='Healthy_and_Dietetic'>Healthy and Dietetic</option>
-                            <option value='Vegan'>Vegan</option>
-                            <option value='Desserts'>Desserts</option>
-                            <option value='Other'>Other</option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ingr">Ingredients</label>
-                        <textarea class="form-control" placeholder="What ingredients I need?"
-                                  form='{{ form.ingredients }}'></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" placeholder="Tell me how to cook it!"
-                                  form='{{ form.description }}'></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for='photo'>Photo</label>
-                        <input type="file" class="form-control-file" form='{{ form.photo }}'>
-                    </div>
-
-                    <div class="form-group">
-                        <label for='video'>Video</label>
-                        <input type="file" class="form-control-file" form='{{ form.video }}'>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Time">Time (Minutes)</label>
-                        <input type="number" class="form-control" form='{{ form.time }}'>
-                    </div>
-{% endcomment %}
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5" value="Create">
                     </div>
@@ -166,10 +87,10 @@
             </div>
         </div>
 
-        <div class="bg-circle-1 bg-circle"></div>
-        <div class="bg-circle-2 bg-circle"></div>
-        <div class="bg-circle-3 bg-circle"></div>
-        {#            <div class="bg-circle-4 bg-circle"></div>#}
+        <div class="bg-circle-1 bg-circle" style="z-index: -1"></div>
+        <div class="bg-circle-2 bg-circle" style="z-index: -1"></div>
+        <div class="bg-circle-3 bg-circle" style="z-index: -1"></div>
+        <div class="bg-circle-4 bg-circle" style="z-index: -1"></div>
 
 </header>
 

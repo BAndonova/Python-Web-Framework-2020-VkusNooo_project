@@ -15,13 +15,22 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.global_settings import MEDIA_ROOT
+from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
+from django.views.static import serve
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('vkusnooo_app.urls')),
                   path('auth/', include('vkusnooo_auth.urls')),
-              ] + static(settings.MEDIA_URL, document_root=MEDIA_ROOT) + staticfiles_urlpatterns()
+              ]
+
+urlpatterns += [url(r'^media/(?P<path>.*)', serve, {'document_root': settings.MEDIA_ROOT})]
+
+# The issue with yours could be that your media URL entry in urls.py is not correct.
+# You seem to be not matching the actual URL of the media file, which is probably some thing
+# like /media/something.png. You seem to be just qualifying on /media/. I also think your regex
+# should be ^media/, not /media/.

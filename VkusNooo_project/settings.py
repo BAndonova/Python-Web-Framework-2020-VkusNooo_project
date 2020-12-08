@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'http://vkusno.herokuapp.com',
     'vkusno.herokuapp.com',
+    '127.0.0.1:8000',
 
 ]
 
@@ -96,7 +97,7 @@ WSGI_APPLICATION = 'VkusNooo_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dc7rdonebu0pm7',
         'USER': 'fuowdhqfmxsjwt',
         'PASSWORD': '5ad1b082767dd1f54ba1be8d19d5d7c9164aabba268602d4a8f3d84e3dd4585d',

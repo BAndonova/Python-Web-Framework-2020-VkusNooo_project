@@ -10,7 +10,7 @@ class LikeInline(admin.TabularInline):
     model = Like
 
 
-class PetAdmin(admin.ModelAdmin):
+class RecipeAdmin(admin.ModelAdmin):
     list_display = ('id', 'type', 'title', 'time')
     list_filter = ('type', 'age')
     inlines = (

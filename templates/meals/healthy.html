@@ -9,26 +9,66 @@
 
 </head>
 <body>
-{% block site_content %}
-    <h1 class="masthead-subheading text-dark text-center">These are out Healthy and Dietetic Recipes.</h1>
-    <div class="d-inline p-52 w-50 text-center align-content-center">
-    {% if not recipe %}
-        <h3 class="masthead-subheading text-dark text-center">There are no recipes currently.
-            You can sign up/ in and share your favourite one!</h3>
-    {% endif %}
-    {% for rec in recipe %}
-        <div class="card" style="width: 18rem;">
-            <img src="{{ rec.photo.rec.id }} " class="card-img-top" alt="recipe_photo">
-            <div class="card-body">
-                <h5 class="card-title">{{ rec.title }}</h5>
-                <p class="card-text"> <img src="{% static 'img/cooking time.png' %}" width="40" height="40"
-             class="d-inline-block align-top">Total Time needed: {{ rec.time }} (min)</p>
-                <p class="card-text"> Created By: {{ rec.user.user.username }}.</p>
-                <a href="#" class="btn btn-primary">See Details</a>
-            </div>
-        </div>
 
-    {% endfor %}
+{% block site_content %}
+    <h1 class="masthead-subheading text-dark text-center">The Desserts</h1>
+    <div class="d-inline p-52 w-50 text-center align-content-center">
+        {% if not recipe %}
+            <h3 class="masthead-subheading text-dark text-center">There are no recipes currently.
+                You can sign up/ in and share your favourite one!</h3>
+        {% endif %}
+
+    </div>
+
+    <div class="row">
+        <div class="card-deck">
+            {% for rec in recipe %}
+                <div class="card-group">
+                    <div class="card" style="width: 23rem;">
+                        {% if rec.photo %}
+                            <img src="{{ rec.photo.url }}" style="width: 40%; height: 40%"
+                                 class="card-img-top img-fluid"
+                                 alt="Recipe Photo">
+                        {% else %}
+                            <img src="{% static 'img/vkusno3.jpg' %}" style="width: 40%; height: 40%"
+                                 class="card-img-top"
+                                 alt="Recipe Photo">
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ rec.title }}</h5>
+                            <p class="card-text"><img src="{% static 'img/cooking time.png' %}" width="40"
+                                                      height="40"
+                                                      class="d-inline-block align-top"> Time
+                                needed: {{ rec.time }} (min)
+                            </p>
+
+                            <div class="card-footer">
+                                <small class="text-muted">Created By: {{ rec.created_by }}</small>
+                            </div>
+
+                            <a href="{% url 'details recipe' rec.id %}"
+                               class="btn btn-primary btn-md rounded-pill mt-10">See
+                                Details</a>
+                            {% if can_like %}
+                                <input action="{% url 'like recipe' rec.id %}" id="toggle-heart" type="checkbox"/>
+                                <label for="toggle-heart">❤</label>
+                            {% else %}
+                                <input action="{% url 'like recipe' rec.id %}" id="toggle-heart" type="checkbox"/>
+                                <label for="toggle-heart">❤</label>
+
+                            {% endif %}
+                            <p class="small">Likes: {{ recipe.like_set.count }}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+    </body>
 
 {% endblock %}
-</body>

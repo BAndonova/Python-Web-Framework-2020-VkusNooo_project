@@ -8,7 +8,7 @@ from vkusnooo_auth.models import UserProfile
 class RegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ('username', 'email',)
         widgets = {
             'password': forms.PasswordInput(),
         }

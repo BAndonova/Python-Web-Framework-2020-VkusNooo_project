@@ -29,9 +29,10 @@ SECRET_KEY = '-7+6z5kq#n&)g4d0@)2zgom^5)zjbk60*#(yag0e-=sd#r%_$3'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'http://vkusno.herokuapp.com',
     '127.0.0.1',
     'localhost',
-    'vkusno.herokuapp.com',
+
 ]
 
 # Application definition

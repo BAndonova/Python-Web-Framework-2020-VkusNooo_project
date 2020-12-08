@@ -1,1 +1,1 @@
-web: gunicorn vkusnooo-site.wsgi --log-file -
+web: gunicorn VkusNooo_project.wsgi --log-file -

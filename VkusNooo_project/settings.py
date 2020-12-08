@@ -104,8 +104,8 @@ DATABASES = {
         'NAME': 'tasty_recipes',
         'USER': 'postgres',
         'PASSWORD': 'qwe!@#',
-        'HOST': '127.0.0.1',
-        #'PORT': '5432',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
 
     }
 }

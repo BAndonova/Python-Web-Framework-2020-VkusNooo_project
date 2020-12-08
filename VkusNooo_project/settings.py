@@ -16,6 +16,9 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Simplified static file serving.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -25,7 +28,12 @@ SECRET_KEY = '-7+6z5kq#n&)g4d0@)2zgom^5)zjbk60*#(yag0e-=sd#r%_$3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'localhost:8000',
+    'https://vkusnooo-site.herokuapp.com/',
+]
 
 # Application definition
 
@@ -55,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'VkusNooo_project.urls'
@@ -142,3 +151,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
 
 LOGIN_URL = '/auth/login/'
+

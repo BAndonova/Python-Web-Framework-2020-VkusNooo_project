@@ -97,11 +97,11 @@ WSGI_APPLICATION = 'VkusNooo_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tasty_recipes',
-        'USER': 'postgres',
-        'PASSWORD': 'qwe!@#',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '5432',
+        'NAME': 'dc7rdonebu0pm7',
+        'USER': 'fuowdhqfmxsjwt',
+        'PASSWORD': '5ad1b082767dd1f54ba1be8d19d5d7c9164aabba268602d4a8f3d84e3dd4585d',
+        'HOST': 'ec2-54-75-248-49.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
 
     }
 }

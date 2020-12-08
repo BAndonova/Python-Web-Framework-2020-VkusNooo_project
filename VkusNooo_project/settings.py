@@ -31,8 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'localhost:8000',
-    'https://vkusnooo-site.herokuapp.com/',
+    'https://vkusnooo.herokuapp.com/',
 ]
 
 # Application definition

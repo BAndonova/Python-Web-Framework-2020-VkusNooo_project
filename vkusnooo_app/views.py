@@ -16,7 +16,8 @@ def index(request):
 
         context = {
             'recipes': recipes,
-            'recipes_count': recipes_count
+            'recipes_count': recipes_count,
+            'can_delete': recipe.can_delete
         }
 
         return render(request, 'index.html', context)
@@ -30,6 +31,7 @@ def all_recipes(request):
         recipes_count = recipes.count()
         users = UserProfile.objects.all()
         users_count = users.count()
+
         context = {
             'recipes': recipes,
             'recipes_count': recipes_count,
@@ -76,11 +78,12 @@ def create_recipe(request):
 @login_required
 def edit_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
-
+    recipe.can_delete = recipe.created_by_id == request.user.id
     if request.method == 'GET':
         context = {
             'form': RecipeForm(instance=recipe),
             'recipe': recipe,
+            'can_delete': recipe.can_delete
         }
 
         return render(request, 'edit.html', context)
@@ -195,12 +198,38 @@ def healthy(request):
 
 @login_required
 def like_recipe(request, pk):
-    like = Like.objects.filter(user_id=request.user.id, recipe_id=pk).first()
+    like = Like.objects.filter(user_id=request.user.userprofile.id, recipe_id=pk).first()
     if like:
         like.delete()
     else:
         recipe = Recipe.objects.get(pk=pk)
-        like = Like(value="Like", user=request.user.id)
+        like = Like(test=str(pk), user=request.user.userprofile)
         like.recipe = recipe
         like.save()
     return redirect('details recipe', pk)
+
+# @login_required
+# def like_recipe(request, pk):
+#     recipe = Recipe.objects.get(pk=pk)
+#     if recipe.user.user != request.user:
+#         # forbid
+#         pass
+#     if request.method == 'GET':
+#         like = Like.objects.filter(user_id=request.user.id, recipe_id=pk).first()
+#         context = {
+#             'form': RecipeForm(instance=recipe),
+#             'recipe': recipe,
+#             'like': like
+#         }
+#
+#         return render(request, 'details.html', context)
+#     if request.method == "POST":
+#         like = Like.objects.filter(user_id=request.user.id, recipe_id=pk).first()
+#         if like:
+#             like.delete()
+#         else:
+#             recipe = Recipe.objects.get(pk=pk)
+#             like = Like(value="Like", user=request.user.id)
+#             like.recipe = recipe
+#             like.save()
+#         return redirect('details recipe', pk)

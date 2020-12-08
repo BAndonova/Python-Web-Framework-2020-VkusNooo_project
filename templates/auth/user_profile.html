@@ -1,22 +1,26 @@
 {% extends 'partials/base.html' %}
+{% load static %}
 {% block site_content %}
     <div class="text-center">
         <h1>Hello, {{ profile_user.username }}!</h1>
         <h5>This is your profile</h5>
-        {% if profile.profile_picture %}
-            <img class="rounded-circle mb-3" src="{{ profile.profile_picture.url }}" alt="Generic placeholder image"
+        {% if profile.profile_image %}
+            <img class="rounded-circle mb-3" src="{{ profile.profile_image.url }}"
+                 alt="Generic placeholder image"
                  width="140"
                  height="140">
         {% else %}
-            <img class="rounded-circle mb-3" src="https://afribary.com/authors/anonymous-user/photo"
+            <img class="rounded-circle mb-3"
+                 src="https://thumbs.dreamstime.com/b/profile-member-icon-isolated-elegant-pink-round-button-abstract-illustration-profile-member-icon-elegant-pink-round-button-105988859.jpg"
                  alt="Generic placeholder image" width="140"
                  height="140">
         {% endif %}
+        <h5>Birth Date: {{ profile.date_of_birth.date }}</h5>
         <div class="w-50 m-auto">
             <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
                 {{ form }}
                 {% csrf_token %}
-                <button class="btn btn-primary btn-sm rounded-pill mt-sm-n1">Upload</button>
+                <button class="btn btn-primary btn-sm rounded-pill mt-sm-n1">Update</button>
             </form>
         </div>
     </div>
@@ -28,14 +32,25 @@
                 {% for recipe in recipes %}
                     <div class="col-lg-4">
                         <div class="card" style="width: 18rem;">
-                            <img src="{{ recipe.image.url }}" class="card-img-top" alt="Image of {{ recipe.name }}">
+                            <img src="{{ recipe.photo.url }}" class="card-img-top" alt="{% static 'img/vkusno3.jpg' %}">
                             <div class="card-body">
-                                <h5 class="card-title">{{ recipe.type }} {{ recipe.name }}, Age: {{ recipe.age }}</h5>
-                                <p class="card-text">{{ recipe.description }}</p>
-                                <p class="card-text"><strong>Owner: {{ recipe.user.user.username }}</strong></p>
+                                <h5 class="card-title">{{ recipe.type }}</h5>
+                                <h5 class="card-title">{{ recipe.title }}</h5>
+                                <p class="card-text"><img src="{% static 'img/cooking time.png' %}" width="40"
+                                                          height="40"
+                                                          class="d-inline-block align-top"> Time
+                                    needed: {{ recipe.time }} (min)
+                                </p>
+                                <p class="card-text"><strong>Created by: {{ recipe.created_by }}</strong></p>
                                 <a href="{% url 'details recipe' recipe.id %}"
                                    class="btn btn-primary btn-sm rounded-pill mt-sm-n1">See
                                     Details</a>
+
+                                <a href="{% url 'edit recipe' recipe.pk %}"
+                                   class="btn btn-primary btn-sm rounded-pill mt-5">Edit</a>
+                                <a href="{% url 'delete recipe' recipe.pk %}"
+                                   class="btn btn-primary btn-sm rounded-pill mt-5">Delete</a>
+
                             </div>
                         </div>
                     </div>

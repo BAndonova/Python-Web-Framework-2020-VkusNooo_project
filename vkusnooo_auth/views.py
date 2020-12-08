@@ -77,11 +77,12 @@ def logout_user(request):
 
 def user_profile(request, pk=None):
     user = request.user if pk is None else User.objects.get(pk=pk)
+    profile = user.userprofile
     if request.method == 'GET':
         context ={
             'profile_user': user,
-            'profile': user.userprofile,
-            'recipes': user.userprofile.recipe_set.all(),
+            'profile': profile,
+            'recipes': user.recipe_set.all(),
             'form': ProfileForm(),
         }
         return render(request, 'auth/user_profile.html', context)

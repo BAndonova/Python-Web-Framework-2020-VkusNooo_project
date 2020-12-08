@@ -32,6 +32,7 @@ class Recipe(models.Model):
     time = models.IntegerField()
     # user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, default=User)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=User)
+
     # liked = models.ManyToManyField(UserProfile, blank=True, related_name='liked')
 
     def __str__(self):
@@ -48,11 +49,11 @@ class Like(models.Model):
         ('Dislike', 'Dislike'),
     )
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    test = models.CharField(choices=LIKE_CHOICES, default=None, max_length=10)
+    test = models.CharField(max_length=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    text = models.TextField(blank=False)
+    value = models.TextField(blank=False)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)

@@ -52,9 +52,19 @@
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout view' %}">Welcome, {{ user.username }}! Sign
-                            Out</a>
+                        <p class="nav-link" href="#">Welcome, {{ user.username }}!</p>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout view' %}">Sign Out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'current user profile' %}">My Profile</a>
+                    </li>
+                    {% if users.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user profile' %}">User Profiles</a>
+                        </li>
+                    {% endif %}
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login view' %}">Sign In</a>
@@ -73,16 +83,18 @@
 
             <div class="item">
 
+               {% load bootstrap4 %}
                 <form class="col-lg-6 offset-lg-3" method="POST" enctype="multipart/form-data"
-                      action="{% url 'edit recipe' recipe.id %}">
+                      action="{% url 'create recipe' %}">
 
                     {% csrf_token %}
-                    {{ form }}
-
-
+                    {% bootstrap_form form %}
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5" value="Edit">
+                        <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5" value="Create">
+                        <input type="submit" href="{% url 'index' %}" class="btn btn-primary btn-lg rounded-pill mt-5" value="Cancel">
                     </div>
+
+                </form>
 
                 </form>
             </div>

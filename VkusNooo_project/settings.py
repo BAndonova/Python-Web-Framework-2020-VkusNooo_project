@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'http://vkusno.herokuapp.com',
     'vkusno.herokuapp.com',
+    'www.vkusno.tk'
     '127.0.0.1:8000',
 
 ]
@@ -151,4 +152,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
 
 LOGIN_URL = '/auth/login/'
-

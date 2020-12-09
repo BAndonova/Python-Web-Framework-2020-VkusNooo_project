@@ -9,6 +9,7 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email',)
+        # fields ='__all__'
         widgets = {
             'password': forms.PasswordInput(),
         }
@@ -23,8 +24,8 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         exclude = ('user',)
-        fields = '__all__'
-
+        # fields = '__all__'
+        # fields = ('profile_image',)
 
 class LoginForm(forms.Form):
     username = forms.CharField()

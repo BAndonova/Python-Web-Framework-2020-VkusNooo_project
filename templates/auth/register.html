@@ -2,6 +2,9 @@
 {% block title %}
     <title>ВкуснОоо! Вкусотийки в чинийки!| Sign Up</title>
 {% endblock %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% load crispy_forms_filters %}
 
 {% load bootstrap4 %}
 
@@ -11,13 +14,15 @@
         <form method="POST" action="{% url 'register user' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in user_form %}
-                {% bootstrap_field field %}
+                {% bootstrap_field field show_label=True %}
+
             {% endfor %}
 
-{#            {% profile_form.date_of_birth %}#}
             {% for field in profile_form %}
                 {% bootstrap_field field %}
+
             {% endfor %}
+
 
             <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5 center-block" value="Sign Me Up">

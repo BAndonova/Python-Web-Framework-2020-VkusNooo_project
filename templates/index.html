@@ -70,10 +70,12 @@
                        href="{% url 'create recipe' %}">Create Recipe</a>
                 </li>
 
+            {% if not user.is_authenticated  %}
                 <li class="nav-item">
                     <a class="nav-link {% if current_page == 'auth/register' %} active {% endif %}"
                        href="{% url 'register user' %}">Sign Up</a>
                 </li>
+            {% endif %}
 
 
                 {% if user.is_authenticated %}

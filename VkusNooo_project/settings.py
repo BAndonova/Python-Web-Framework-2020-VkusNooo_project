@@ -30,12 +30,17 @@ SECRET_KEY = '-7+6z5kq#n&)g4d0@)2zgom^5)zjbk60*#(yag0e-=sd#r%_$3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+DJANGO_DEBUG = False
+
 ALLOWED_HOSTS = [
     'http://vkusno.herokuapp.com',
     'vkusno.herokuapp.com',
     'www.vkusno.tk'
     '127.0.0.1:8000',
     '127.0.0.1',
+    'localhost',
+    '[::1]',
+    '0.0.0.0',
 
 ]
 
@@ -140,7 +145,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

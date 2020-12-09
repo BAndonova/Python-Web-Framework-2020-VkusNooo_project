@@ -806,7 +806,7 @@ false Zulu
     <database id="6" parent="1" name="tasty_recipes">
       <ObjectId>16572</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1106</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1108</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16573|16575|1
 sequence|table|16584|16586|1
@@ -899,7 +899,7 @@ UC/10
 </Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1107</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1109</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="23" parent="6" name="plpgsql">

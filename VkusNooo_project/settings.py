@@ -107,11 +107,11 @@ WSGI_APPLICATION = 'VkusNooo_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'NAME':'dc7rdonebu0pm7',
+        'USER': 'fuowdhqfmxsjwt',
+        'PASSWORD': '5ad1b082767dd1f54ba1be8d19d5d7c9164aabba268602d4a8f3d84e3dd4585d',
+        'HOST': 'ec2-54-75-248-49.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 

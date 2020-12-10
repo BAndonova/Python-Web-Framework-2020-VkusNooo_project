@@ -41,6 +41,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -65,17 +66,18 @@
                     </div>
                 </li>
 
+
                 <li class="nav-item">
                     <a class="nav-link {% if current_page == 'create' %} active {% endif %}"
                        href="{% url 'create recipe' %}">Create Recipe</a>
                 </li>
 
-            {% if not user.is_authenticated  %}
-                <li class="nav-item">
-                    <a class="nav-link {% if current_page == 'auth/register' %} active {% endif %}"
-                       href="{% url 'register user' %}">Sign Up</a>
-                </li>
-            {% endif %}
+                {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if current_page == 'auth/register' %} active {% endif %}"
+                           href="{% url 'register user' %}">Sign Up</a>
+                    </li>
+                {% endif %}
 
 
                 {% if user.is_authenticated %}
@@ -88,11 +90,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'current user profile' %}">My Profile</a>
                     </li>
-{#                    {% if user.is_superuser %}#}
-{#                        <li class="nav-item">#}
-{#                            <a class="nav-link" href="{% url 'user profile' %}">User Profiles</a>#}
-{#                        </li>#}
-{#                    {% endif %}#}
+
+                    {% if user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ ALLOWED_HOSTS }} admin">Admin Part</a>
+                            </li>
+                        {% endif %}
+
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login view' %}">Sign In</a>

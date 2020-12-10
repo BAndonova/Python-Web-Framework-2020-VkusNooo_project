@@ -15,12 +15,12 @@
             {% csrf_token %}
             {% for field in user_form %}
                 {% bootstrap_field field show_label=True %}
-
             {% endfor %}
 
+            <p class="text-info">The Date of Birth field is not mandatory. If you would like to fill it,
+                please yse the format YYYY-MM-DD.</p>
             {% for field in profile_form %}
                 {% bootstrap_field field %}
-
             {% endfor %}
 
 

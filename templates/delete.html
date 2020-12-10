@@ -62,7 +62,7 @@
                     </li>
                     {% if users.is_superuser %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'user profile' %}">User Profiles</a>
+                            <a class="nav-link" href="{% url 'user profiles' %}">User Profiles</a>
                         </li>
                     {% endif %}
                 {% else %}
@@ -83,12 +83,12 @@
 
             <div class="item">
 
+                {% load bootstrap4 %}
                 <form class="col-lg-6 offset-lg-3" method="POST" enctype="multipart/form-data"
                       action="{% url 'delete recipe' recipe.id %}">
 
                     {% csrf_token %}
-                    {{ form }}
-
+                    {% bootstrap_form form %}
 
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5" value="Delete">

@@ -125,7 +125,7 @@ def details_recipe(request, pk):
 @login_required
 def delete_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
-    if recipe.user.user != request.user:
+    if recipe.created_by_id != request.user:
         # forbid
         pass
     if request.method == 'GET':

@@ -9,11 +9,12 @@ from vkusnooo_app.models import Recipe, Like
 
 
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'type', 'title', 'time')
-    list_filter = ('type', 'time')
+    list_display = ('id', 'type', 'title', 'time', 'created_by',)
+    list_filter = ('type', 'time', 'created_by')
     # inlines = (
     #     LikeInline,
     # )
+
 
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Like)

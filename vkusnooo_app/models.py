@@ -38,7 +38,7 @@ class Recipe(models.Model):
     # liked = models.ManyToManyField(UserProfile, blank=True, related_name='liked')
 
     def __str__(self):
-        return f'{self.id} {self.title}  {self.time}'
+        return f'{self.id} {self.title}  {self.time} {self.created_by}'
 
     @property
     def likes_count(self):

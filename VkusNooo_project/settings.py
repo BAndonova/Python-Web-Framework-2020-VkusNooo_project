@@ -14,6 +14,7 @@ from os.path import join
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import cloudinary
 import django_heroku
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,6 +60,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'recipe_core',
     'crispy_forms',
+    'cloudinary',
 
 ]
 
@@ -107,7 +109,7 @@ WSGI_APPLICATION = 'VkusNooo_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'dc7rdonebu0pm7',
+        'NAME': 'dc7rdonebu0pm7',
         'USER': 'fuowdhqfmxsjwt',
         'PASSWORD': '5ad1b082767dd1f54ba1be8d19d5d7c9164aabba268602d4a8f3d84e3dd4585d',
         'HOST': 'ec2-54-75-248-49.eu-west-1.compute.amazonaws.com',
@@ -161,3 +163,9 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 LOGIN_URL = '/auth/login/'
 
 django_heroku.settings(locals())
+
+cloudinary.config(
+    cloud_name="hmjmynord",
+    api_key="411653417913363",
+    api_secret="_uFPTeTgFoe3gLa7ZdnNXOnRbg8"
+)

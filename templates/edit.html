@@ -85,12 +85,12 @@
 
                {% load bootstrap4 %}
                 <form class="col-lg-6 offset-lg-3" method="POST" enctype="multipart/form-data"
-                      action="{% url 'create recipe' %}">
+                      action="{% url 'edit recipe' recipe.id %}">
 
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5" value="Create">
+                        <input type="submit" class="btn btn-primary btn-lg rounded-pill mt-5" value="Edit">
                         <input type="submit" href="{% url 'index' %}" class="btn btn-primary btn-lg rounded-pill mt-5" value="Cancel">
                     </div>
 

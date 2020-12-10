@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from embed_video.fields import EmbedVideoField
+from cloudinary import models as cloudinary_models
 
 from vkusnooo_auth.models import UserProfile
 
@@ -27,8 +28,9 @@ class Recipe(models.Model):
     # image_url = models.URLField()
     description = models.TextField()
     ingredients = models.CharField(max_length=10000)
-    photo = models.ImageField(upload_to='pictures', blank=True)
-    video = models.ImageField(upload_to='videos', blank=True)
+    photo = cloudinary_models.CloudinaryField('image', blank=True)
+    video = cloudinary_models.CloudinaryField('video', blank=True)
+    # video = models.ImageField(upload_to='videos', blank=True)
     time = models.IntegerField()
     # user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, default=User)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=User)

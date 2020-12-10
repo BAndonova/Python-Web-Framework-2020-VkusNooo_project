@@ -28,36 +28,37 @@
     {% if recipes %}
         <h2 class='text-center'>These are you recipe photos</h2>
 
-        <div class="row">
-            {% for recipe in recipes %}
-                <div class="col-lg-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{ recipe.photo.url }}" class="card-img-top" alt="{% static 'img/vkusno3.jpg' %}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ recipe.type }}</h5>
-                            <h5 class="card-title">{{ recipe.title }}</h5>
-                            <p class="card-text"><img src="{% static 'img/cooking time.png' %}" width="40"
-                                                      height="40"
-                                                      class="d-inline-block align-top"> Time
-                                needed: {{ recipe.time }} (min)
-                            </p>
-                            <p class="card-text"><strong>Created by: {{ recipe.created_by }}</strong></p>
-                            <div class="button-form">
-                                <a href="{% url 'details recipe' recipe.id %}"
-                                   class="btn btn-primary btn-sm rounded-pill mt-sm-n1">See
-                                    Details</a>
-                                <a href="{% url 'edit recipe' recipe.pk %}"
-                                   class="btn btn-primary btn-sm rounded-pill mt-5">Edit</a>
-                                <a href="{% url 'delete recipe' recipe.pk %}"
-                                   class="btn btn-primary btn-sm rounded-pill mt-5">Delete</a>
-                            </div>
+        <div class="select2-selection--multiple">
+            <div class="row">
+                {% for recipe in recipes %}
+                    <div class="col-lg-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ recipe.photo.url }}" class="card-img-top" alt="{% static 'img/vkusno3.jpg' %}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ recipe.type }}</h5>
+                                <h5 class="card-title">{{ recipe.title }}</h5>
+                                <p class="card-text"><img src="{% static 'img/cooking time.png' %}" width="40"
+                                                          height="40"
+                                                          class="d-inline-block align-top"> Time
+                                    needed: {{ recipe.time }} (min)
+                                </p>
+                                <p class="card-text"><strong>Created by: {{ recipe.created_by }}</strong></p>
+                                <div class="button-form">
+                                    <a href="{% url 'details recipe' recipe.id %}"
+                                       class="btn btn-primary btn-sm rounded-pill mt-sm-n1">See
+                                        Details</a>
+                                    <a href="{% url 'edit recipe' recipe.pk %}"
+                                       class="btn btn-primary btn-sm rounded-pill mt-5">Edit</a>
+                                    <a href="{% url 'delete recipe' recipe.pk %}"
+                                       class="btn btn-primary btn-sm rounded-pill mt-5">Delete</a>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-
     {% else %}
         <div class="text-center">
             <h2>You have no recipes</h2>

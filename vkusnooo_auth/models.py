@@ -14,3 +14,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return f'{self.user.id}; {self.user.username}; {self.creation_date}; {self.date_of_birth}'
 
+    def count_profiles(self, profile):
+        profiles_numbers = UserProfile.profile.count()
+

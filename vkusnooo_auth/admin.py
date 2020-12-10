@@ -2,15 +2,10 @@ from django.contrib import admin
 
 from vkusnooo_auth.models import UserProfile
 
-admin.site.register(UserProfile)
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'date_of_birth', 'creation_date')
+    list_filter = ('creation_date','date_of_birth',)
 
 
-# class UserInLine(admin.TabularInline):
-#     model = UserProfile
-#
-# class UserProfileAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'profile_image', 'username', 'date_of_birth', 'creation_date')
-#     list_filter = ('user', 'profile_image', 'username', 'date_of_birth', 'creation_date')
-#     # inlines = (
-#     #     UserInLine,
-#     # )
+admin.site.register(UserProfile, UserProfileAdmin)

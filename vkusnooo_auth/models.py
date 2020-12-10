@@ -12,5 +12,5 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.id}; {self.user.username}; {self.creation_date}; {self.date_of_birth}'
 

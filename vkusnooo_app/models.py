@@ -40,9 +40,9 @@ class Recipe(models.Model):
     def __str__(self):
         return f'{self.id} {self.title}  {self.time} {self.created_by}'
 
-    @property
-    def likes_count(self):
-        return self.liked.all().count()
+    # @property
+    # def likes_count(self):
+    #     return self.liked.all().count()
 
 
 class Like(models.Model):

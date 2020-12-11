@@ -93,7 +93,7 @@
 
                     {% if user.is_superuser %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ ALLOWED_HOSTS }} admin">Admin Part</a>
+                                <a class="nav-link" href="/admin">Admin Part</a>
                             </li>
                         {% endif %}
 
@@ -140,7 +140,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="p-5">
-                    <h2 class="display-4">Our Recipes are {{ recipes_count }}</h2>
+                    <h2 class="display-4"> {{ recipes_count }} Tasty Recipes </h2>
                     <p>Our recipes portfolio is constantly increasing. Currently we provide huge number
                         and variety of recipes. Check them out!
                     </p>
@@ -162,10 +162,10 @@
             </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
-                    <h2 class="display-4">Happy Members!</h2>
-                    <p>The main force of the site are our users. The people love cooking increasing. Those are
+                    <h2 class="display-4">  {{ users_count }} Happy Members! </h2>
+                    <p>The main force of the site are our users. The numbers of the people love cooking are increasing. Those are
                         the people sharing their experience and favourite recipes making the rest of the users
-                        happy! {{ users_count }}
+                        happy!
                     </p>
                     <a href="{% url 'all recipes' %}" class="btn btn-primary btn-lg rounded-pill mt-5">Learn
                         More</a>

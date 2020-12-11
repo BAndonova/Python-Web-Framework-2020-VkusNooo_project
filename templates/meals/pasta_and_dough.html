@@ -10,7 +10,7 @@
 </head>
 <body>
 {% block site_content %}
-    <h1 class="masthead-subheading text-dark text-center">asta and Dough Meals</h1>
+    <h1 class="masthead-subheading text-dark text-center">Pasta and Dough Meals</h1>
     <div class="d-inline p-52 w-50 text-center align-content-center">
         {% if not recipe %}
             <h3 class="masthead-subheading text-dark text-center">There are no recipes currently.
@@ -49,15 +49,7 @@
                             <a href="{% url 'details recipe' rec.id %}"
                                class="btn btn-primary btn-md rounded-pill mt-10">See
                                 Details</a>
-                            {% if can_like %}
-                                <input action="{% url 'like recipe' rec.id %}" id="toggle-heart" type="checkbox"/>
-                                <label for="toggle-heart">❤</label>
-                            {% else %}
-                                <input action="{% url 'like recipe' rec.id %}" id="toggle-heart" type="checkbox"/>
-                                <label for="toggle-heart">❤</label>
 
-                            {% endif %}
-                            <p class="small">Likes: {{ recipe.like_set.count }}</p>
                         </div>
                     </div>
                 </div>

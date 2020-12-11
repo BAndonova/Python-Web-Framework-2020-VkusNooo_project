@@ -5,19 +5,24 @@ from recipe_core.decorators import group_required
 from vkusnooo_app.models import Recipe, Like
 from vkusnooo_app.forms import RecipeForm
 from vkusnooo_auth.models import UserProfile
+from vkusnooo_auth.views import user_count
 
 
 def index(request):
     if Recipe.objects.exists():
         recipes = Recipe.objects.all()
         recipes_count = recipes.count()
-        for recipe in recipes:
-            recipe.can_delete = recipe.created_by_id == request.user.id
+        users_all = UserProfile.objects.all()
+        users_count = users_all.count()
+
+        # for recipe in recipes:
+        #     recipe.can_delete = recipe.created_by_id == request.user.id
 
         context = {
             'recipes': recipes,
             'recipes_count': recipes_count,
-            'can_delete': recipe.can_delete
+            # 'can_delete': recipe.can_delete,
+            'users_count': users_count,
         }
 
         return render(request, 'index.html', context)
@@ -29,13 +34,13 @@ def all_recipes(request):
     if Recipe.objects.exists():
         recipes = Recipe.objects.all()
         recipes_count = recipes.count()
-        users = UserProfile.objects.all()
-        users_count = users.count()
+        users_all = UserProfile.objects.all()
+        users_count = users_all.count()
 
         context = {
             'recipes': recipes,
             'recipes_count': recipes_count,
-            'users_count': users_count,
+            'users_count': user_count,
         }
 
         return render(request, 'all_recipes.html', context)
@@ -49,11 +54,10 @@ def create_recipe(request):
     if request.method == 'GET':
         instance = Recipe(created_by=request.user)
         context = {
-            # 'recipes': recipes
             'form': RecipeForm(),
             'current_page': 'create',
             'created_by': instance,
-            # 'show_delete': recipe.user == request.user
+
         }
 
         return render(request, 'create.html', context)
@@ -78,7 +82,9 @@ def create_recipe(request):
 @login_required
 def edit_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
-    recipe.can_delete = recipe.created_by_id == request.user.id
+    if recipe.created_by_id == request.user.id or request.user.is_superuser:
+        recipe.can_delete = True
+
     if request.method == 'GET':
         context = {
             'form': RecipeForm(instance=recipe),
@@ -106,7 +112,8 @@ def details_recipe(request, pk):
     # user = Recipe.created_by.get(isinstance=recipe)
     ingr = recipe.ingredients.split(',')
 
-    recipe.can_delete = recipe.created_by_id == request.user.id
+    if recipe.created_by_id == request.user.id or request.user.is_superuser:
+        recipe.can_delete = True
 
     if request.method == 'GET':
         # user = Recipe.created_by
@@ -117,6 +124,7 @@ def details_recipe(request, pk):
             'can_delete': recipe.can_delete,
             'can_like': recipe.created_by_id != request.user.id,
             'has_liked': recipe.like_set.filter(user_id=request.user.id).exists(),
+            'current_page': 'all recipes',
         }
 
         return render(request, 'details.html', context)
@@ -125,7 +133,7 @@ def details_recipe(request, pk):
 @login_required
 def delete_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
-    if recipe.created_by_id != request.user:
+    if recipe.created_by_id != request.user or request.user.is_superuser:
         # forbid
         pass
     if request.method == 'GET':
@@ -141,9 +149,9 @@ def delete_recipe(request, pk):
 
 
 def desserts(request):
-    recipe = Recipe.objects.filter(type='Desserts')
+    recipes = Recipe.objects.filter(type='Desserts')
     context = {
-        'recipe': recipe,
+        'recipes': recipes,
     }
     return render(request, 'meals/desserts.html', context)
 
@@ -174,6 +182,7 @@ def other(request):
 
 def pasta_dough(request):
     recipe = Recipe.objects.filter(type='Pasta and Dough')
+
     context = {
         'recipe': recipe,
     }

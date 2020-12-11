@@ -1,68 +1,126 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block site_content %}
-    <div class="text-center">
-        <h1>Hello, {{ profile_user.username }}!</h1>
-        <h5>This is your profile</h5>
-        {% if profile.profile_image %}
-            <img class="rounded-circle mb-3" src="{{ profile.profile_image.url }}"
-                 alt="Generic placeholder image"
-                 width="140"
-                 height="140">
-        {% else %}
-            <img class="rounded-circle mb-3"
-                 src='{% static 'img/default_profile.jpg' %}'
-                 alt="Generic placeholder image" width="140"
-                 height="140">
-        {% endif %}
-        <h5>Birth Date: {{ profile.date_of_birth.date }}</h5>
-        <div class="w-50 m-auto">
-            <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
-                {{ form }}
-                {% csrf_token %}
-                <button class="btn btn-primary btn-sm rounded-pill mt-sm-n1">Update</button>
-            </form>
-        </div>
-    </div>
-    <hr>
-    {% if recipes %}
-        <h2 class='text-center'>These are you recipe photos</h2>
 
-        <div class="select2-selection--multiple">
-            <div class="row">
-                {% for recipe in recipes %}
-                    <div class="col-lg-4">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{{ recipe.photo.url }}" class="card-img-top" alt="{% static 'img/vkusno3.jpg' %}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ recipe.type }}</h5>
-                                <h5 class="card-title">{{ recipe.title }}</h5>
-                                <p class="card-text"><img src="{% static 'img/cooking time.png' %}" width="40"
-                                                          height="40"
-                                                          class="d-inline-block align-top"> Time
-                                    needed: {{ recipe.time }} (min)
-                                </p>
-                                <p class="card-text"><strong>Created by: {{ recipe.created_by }}</strong></p>
-                                <div class="button-form">
-                                    <a href="{% url 'details recipe' recipe.id %}"
-                                       class="btn btn-primary btn-sm rounded-pill mt-sm-n1">See
-                                        Details</a>
-                                    <a href="{% url 'edit recipe' recipe.pk %}"
-                                       class="btn btn-primary btn-sm rounded-pill mt-5">Edit</a>
-                                    <a href="{% url 'delete recipe' recipe.pk %}"
-                                       class="btn btn-primary btn-sm rounded-pill mt-5">Delete</a>
-                                </div>
+    {{ profile.users_count }}
 
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+    {% if user.is_authenticated %}
+        <div class="text-center">
+            <h1>Hello, {{ profile_user.username }}!</h1>
+            <h5>This is your profile</h5>
+            {% if profile.profile_image %}
+                <img class="rounded-circle mb-3" src="{{ profile.profile_image.url }}"
+                     alt="Generic placeholder image"
+                     width="140"
+                     height="140">
+            {% else %}
+                <img class="rounded-circle mb-3"
+                     src='{% static 'img/default_profile.jpg' %}'
+                     alt="Generic placeholder image" width="140"
+                     height="140">
+            {% endif %}
+            <h5>Birth Date: {{ profile.date_of_birth.date }}</h5>
+            <div class="w-50 m-auto">
+                <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
+                    {{ form }}
+                    {% csrf_token %}
+                    <button class="btn btn-primary btn-sm rounded-pill mt-sm-n1">Update</button>
+                </form>
             </div>
         </div>
-    {% else %}
-        <div class="text-center">
-            <h2>You have no recipes</h2>
-            <a href="{% url 'create recipe' %}" class="btn btn-primary btn-sm rounded-pill mt-sm-n1">Add Recipe</a>
-        </div>
+        <hr>
+
+        {% if user.is_superuser %}
+            <div class="text-center">
+                <a href="/admin" class="btn btn-primary btn-xl rounded-pill mt-5 center-block">Go to Admin Page</a>
+            </div>
+        {% endif %}
+
+        {% if recipes %}
+            {% if user.is_superuser %}
+                <div>
+                    <h2 class='text-center text-dark'>These are all the recipes. </h2>
+                    <p class="text-dark text-center"> Here you can add new recipe :
+                        <a href="{% url 'create recipe' %}"
+                           class="btn btn-primary btn-sm rounded-pill mt-5">Add Recipe</a></p>
+                </div>
+            {% else %}
+
+                <div>
+                    <h2 class='text-center text-dark'>These are you recipes: </h2>
+                    <p class="text-dark text-center"> Here you can add new recipe:
+                        <a href="{% url 'create recipe' %}"
+                           class="btn btn-primary btn-sm rounded-pill mt-5">Add Recipe</a></p>
+                </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="card-deck">
+                    {% for recipe in recipes %}
+                        <div class="card-group">
+                            <div class="card align-items-center" style="width: 23rem; height: 35rem">
+                                {% if recipe.photo %}
+                                    <img src="{{ recipe.photo.url }}" style="width: 40%; height: 40%"
+                                         class="card-img-top img-rounded"
+                                         alt="Recipe Photo">
+                                {% else %}
+                                    <img src="{% static 'img/vkusno3.jpg' %}" style="width: 40%; height: 40%"
+                                         class="card-img-top"
+                                         alt="Recipe Photo">
+                                {% endif %}
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Recipe: {{ recipe.title }}</h5>
+                                    <p class="card-text"><img src="{% static 'img/cooking time.png' %}" width="40"
+                                                              height="40"
+                                                              class="d-inline-block align-top"> Time
+                                        needed: {{ recipe.time }} (min)
+                                    </p>
+
+                                    <div class="card-text">
+                                        <small class="text-muted">Created By: {{ recipe.created_by }}</small>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="button-form">
+                                            <a href="{% url 'details recipe' recipe.id %}"
+                                               class="btn btn-primary btn-sm rounded-pill mt-sm-n1">See
+                                                Details</a>
+                                            <a href="{% url 'edit recipe' recipe.pk %}"
+                                               class="btn btn-primary btn-sm rounded-pill mt-5">Edit</a>
+                                            <a href="{% url 'delete recipe' recipe.pk %}"
+                                               class="btn btn-primary btn-sm rounded-pill mt-5">Delete</a>
+                                        </div>
+
+
+
+                                        {#                                        {% if can_like %}#}
+                                        {#                                            <input action="{% url 'like recipe' recipe.id %}" id="toggle-heart"#}
+                                        {#                                                   type="checkbox"/>#}
+                                        {#                                            <label for="toggle-heart">❤</label>#}
+                                        {#                                        {% else %}#}
+                                        {#                                            <input action="{% url 'like recipe' recipe.id %}" id="toggle-heart"#}
+                                        {#                                                   type="checkbox"/>#}
+                                        {#                                            <label for="toggle-heart">❤</label>#}
+                                        {##}
+                                        {#                                        {% endif %}#}
+                                        {#                                        <p class="small">Likes: {{ recipe.like_set.count }}</p>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="text-center">
+                <h2>You have not created any recipes. </h2>
+                <a href="{% url 'create recipe' %}" class="btn btn-primary btn-sm rounded-pill mt-sm-n1">Add Recipe</a>
+            </div>
+        {% endif %}
+
     {% endif %}
+
+
 {% endblock %}

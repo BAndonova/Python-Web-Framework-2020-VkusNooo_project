@@ -2,10 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import transaction
 # from django.shortcuts import render
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import logout, authenticate, login, get_user_model
 from django.shortcuts import render, redirect
 
+from vkusnooo_app.models import Recipe
 from vkusnooo_auth.forms import RegisterForm, ProfileForm, LoginForm
+from vkusnooo_auth.models import UserProfile
 
 
 def get_redirect_url(params):
@@ -79,12 +81,24 @@ def logout_user(request):
 def user_profile(request, pk=None):
     user = request.user if pk is None else User.objects.get(pk=pk)
     profile = user.userprofile
+    users_all = UserProfile.objects.all()
+    users_count = users_all.count()
+
+    if user.is_superuser:
+
+        recipes = Recipe.objects.all()
+
+    else:
+        recipes = user.recipe_set.all()
+
     if request.method == 'GET':
         context ={
             'profile_user': user,
             'profile': profile,
-            'recipes': user.recipe_set.all(),
+            'recipes': recipes,
             'form': ProfileForm(),
+            'user_count': user_count,
+
         }
         return render(request, 'auth/user_profile.html', context)
     else:
@@ -94,3 +108,9 @@ def user_profile(request, pk=None):
             return redirect('current user profile')
 
         return redirect('current user profile')
+
+@property
+def user_count(self):
+    users_all = UserProfile.objects.all()
+    users_count = users_all.count()
+    return users_count

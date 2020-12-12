@@ -57,12 +57,12 @@
 
             {% if can_like %}
                 {% if has_liked %}
-                    <button class="ui button negative" action="{% url 'like recipe' recipe.id %}">Unlike</button>
+                    <a class="ui button negative" href="{% url 'like recipe' recipe.id %}">Unlike</a>
                 {% else %}
-                    <button class="ui button positive" action="{% url 'like recipe' recipe.id %}">Like</button>
+                    <a class="ui button positive" href="{% url 'like recipe' recipe.id %}">Like</a>
                 {% endif %}
             {% endif %}
-            <p class="mt-2">Likes: {{ recipe.like_set.count }}</p>
+            <p class="mt-2">Likes: {{ likes_count }}</p>
 
 
             {% if recipe.can_delete %}

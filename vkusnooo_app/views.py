@@ -1,3 +1,4 @@
+import djclick as click
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -110,20 +111,23 @@ def edit_recipe(request, pk):
 def details_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
     # user = Recipe.created_by.get(isinstance=recipe)
-    ingr = recipe.ingredients.split(',')
+    ingredients = recipe.ingredients.split(',')
 
     if recipe.created_by_id == request.user.id or request.user.is_superuser:
         recipe.can_delete = True
+    else:
+        recipe.can_delete = False
 
     if request.method == 'GET':
         # user = Recipe.created_by
         context = {
             'form': RecipeForm(instance=recipe),
             'recipe': recipe,
-            'ingr': ingr,
+            'ingredients': ingredients,
             'can_delete': recipe.can_delete,
-            'can_like': recipe.created_by_id != request.user.id,
-            'has_liked': recipe.like_set.filter(user_id=request.user.id).exists(),
+            'can_like': recipe.created_by_id != request.user.id or request.user.is_superuser,
+            'has_liked': recipe.like_set.filter(user_id=request.user.id, value=True),
+            'likes_count': recipe.like_set.filter(value=True).count(),
             'current_page': 'all recipes',
         }
 
@@ -181,10 +185,10 @@ def other(request):
 
 
 def pasta_dough(request):
-    recipe = Recipe.objects.filter(type='Pasta and Dough')
+    recipes = Recipe.objects.filter(type='Pasta and Dough')
 
     context = {
-        'recipe': recipe,
+        'recipes': recipes,
     }
     return render(request, 'meals/pasta_and_dough.html', context)
 
@@ -206,14 +210,20 @@ def healthy(request):
 
 
 @login_required
+
 def like_recipe(request, pk):
-    like = Like.objects.filter(user_id=request.user.userprofile.id, recipe_id=pk).first()
-    if like:
-        like.delete()
+    likes = Like.objects.filter(recipe_id=pk).all()
+    user_like = likes.filter(user_id=request.user.userprofile.id).first()
+    if user_like and user_like.value == True:
+        Like.objects.filter(recipe_id=pk, user_id=request.user.userprofile.id).update(value=False)
+
+    elif user_like and user_like.value == False:
+        Like.objects.filter(recipe_id=pk, user_id=request.user.userprofile.id).update(value=True)
+
     else:
-        recipe = Recipe.objects.get(pk=pk)
-        like = Like(test=str(pk), user=request.user.userprofile)
-        like.recipe = recipe
+        # recipe = Recipe.objects.get(pk=pk)
+        like = Like(value=True, user_id=request.user.id, recipe_id=pk)
+        # likes.recipe = recipe
         like.save()
     return redirect('details recipe', pk)
 

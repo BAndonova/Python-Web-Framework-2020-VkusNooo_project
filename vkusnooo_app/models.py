@@ -46,12 +46,8 @@ class Recipe(models.Model):
 
 
 class Like(models.Model):
-    LIKE_CHOICES = (
-        ('Like', 'Like'),
-        ('Dislike', 'Dislike'),
-    )
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    test = models.CharField(max_length=2)
+    value = models.BooleanField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 

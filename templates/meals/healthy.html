@@ -51,7 +51,7 @@
                                class="btn btn-primary btn-md rounded-pill mt-10">See
                                 Details</a>
                             {% if can_like %}
-                                <input action="{% url 'like recipe' rec.id %}" id="toggle-heart" type="checkbox"/>
+                                <input id="toggle-heart" type="checkbox"/>
                                 <label for="toggle-heart">❤</label>
                             {% else %}
                                 <input action="{% url 'like recipe' rec.id %}" id="toggle-heart" type="checkbox"/>

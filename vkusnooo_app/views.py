@@ -83,8 +83,11 @@ def create_recipe(request):
 @login_required
 def edit_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
+
     if recipe.created_by_id == request.user.id or request.user.is_superuser:
         recipe.can_delete = True
+    else:
+        recipe.can_delete = False
 
     if request.method == 'GET':
         context = {

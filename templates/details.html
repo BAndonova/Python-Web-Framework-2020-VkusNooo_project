@@ -6,73 +6,97 @@
 {% block site_content %}
     {% load bootstrap4 %}
 
-    <div class="container">
-        <div class="card">
-            <h1 class="masthead-subheading text-dark text-center">Recipe Details</h1>
-            <div class="d-inline p-52 w-50 text-center align-content-center">
+    <div class="container align-items-center">
 
-                <h2 class="masthead-subheading text-dark text-center">Recipe Name: {{ recipe.title }}</h2>
-
-                {% if recipe.photo %}
-                    <img class="card-img-top" src="{{ recipe.photo.url }}" style="width: 20%; height: 20%"
-                         alt="Recipe Image">
-                {% else %}
-                    <img class="card-img align-items-center" src="{% static 'img/vkusno3.jpg' %}"
-                         style="width: 20%; height: 20%"
-                         alt="No image">
-                {% endif %}
-
-                <div class="time" align="center">
-                    <img src="{% static 'img/cooking time.png' %}" width="40" height="40"
-                         class="d-inline-block align-items-center">
-                    {{ recipe.time }} min
+        <h1 class="masthead-subheading text-dark text-center">Recipe Details</h1>
+        <div class="d-inline p-52 w-50 text-center align-content-center">
+            <div class="card card border-secondary mb-3">
+                <div class="card-header">
+                    <h2 class="card-header masthead-subheading text-dark text-center">
+                        {{ recipe.title }}</h2>
                 </div>
-                <h3 class="masthead-subheading text-dark text-center">What Ingredients I Need?</h3>
-                <ul class="text-justify">
-                    {% for i in ingr %}
-
-                        <li>{{ i }}</li>
-
-                    {% endfor %}
-                </ul>
-                <h3 class="masthead-subheading text-dark text-center">How to prepare?</h3>
-                <div class="text-center">
-                    {{ recipe.description }}
+                <div class="card-img-top">
+                    {% if recipe.photo %}
+                        <img class="card-img align-content-center" src="{{ recipe.photo.url }}"
+                             style="width: 40%; height: 40%"
+                             alt="Recipe Image">
+                    {% else %}
+                        <img class="card-img align-items-center" src="{% static 'img/vkusno3.jpg' %}"
+                             style="width: 40%; height: 40%"
+                             alt="No image">
+                    {% endif %}
                 </div>
 
-                {% if recipe.video %}
-                    <div class="masthead-subheading text-dark text-center">
-                        <h3 class="masthead-subheading text-dark text-center"> Video:</h3>
-                        <video name='recipe video' controls autoplay width='50%' height='40%'>
-                            <source src="{{ recipe.video }}" type="video/mp4">
-                            Video</source>
-                        </video>
+                <div class="card-body">
+                    <div class="card-img-top">
+                        <img src="{% static 'img/cooking time.png' %}" width="40" height="40"
+                             class="d-inline-block align-items-center">
+                        {{ recipe.time }} min
                     </div>
-                {% else %}
-                    <h3 class="masthead-subheading text-dark text-center"> Video:</h3>
-                    <p class="masthead-subheading text-dark text-center"> We are sorry, no video is available for this
-                        recipe!</p>
-                {% endif %}
-            </div>
-
-            {% if can_like %}
-                {% if has_liked %}
-                    <a class="ui button negative" href="{% url 'like recipe' recipe.id %}">Unlike</a>
-                {% else %}
-                    <a class="ui button positive" href="{% url 'like recipe' recipe.id %}">Like</a>
-                {% endif %}
-            {% endif %}
-            <p class="mt-2">Likes: {{ likes_count }}</p>
-
-
-            {% if recipe.can_delete %}
-                <div class="buttons-container align-items-center">
-                    <a href="{% url 'edit recipe' recipe.pk %}"
-                       class="btn btn-primary btn-lg rounded-pill mt-5">Edit</a>
-                    <a href="{% url 'delete recipe' recipe.pk %}"
-                       class="btn btn-primary btn-lg rounded-pill mt-5">Delete</a>
                 </div>
-            {% endif %}
+                <div class="card-text">
+                    <h3 class="masthead-subheading text-dark text-center">What Ingredients I Need?</h3>
+                    <ul class="text-center list-group-item-text">
+                        {% for i in ingredients %}
+
+                            <li class="list-inline">{{ i }}</li>
+
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-text">
+                    <h3 class="masthead-subheading text-dark text-center">How to prepare?</h3>
+                    <div class="text-center">
+                        {{ recipe.description }}
+                    </div>
+                </div>
+                <div class="card-img-top">
+                    {% if recipe.video %}
+                        <div class="masthead-subheading text-dark text-center">
+                            <h3 class="masthead-subheading text-dark text-center"> Video:</h3>
+                            <video name='recipe video' controls autoplay width='50%' height='40%'>
+                                <source src="{{ recipe.video }}" type="video/mp4">
+                                Video</source>
+                            </video>
+                        </div>
+                    {% else %}
+                        <h3 class="masthead-subheading text-dark text-center"> Video:</h3>
+                        <p class="masthead-subheading text-dark text-center"> We are sorry, no video is available for
+                            this
+                            recipe!</p>
+                    {% endif %}
+                </div>
+
+                <div class="card-text align-items-center">
+                    {% if user.is_authenticated %}
+                        {% if can_like %}
+                            {% if has_liked %}
+                                <a class="text-danger center-block" href="{% url 'like recipe' recipe.id %}">
+                                    <label for="toggle-heart">❤</label>
+                                </a>
+                            {% else %}
+                                <a class="text-danger center-block" href="{% url 'like recipe' recipe.id %}">
+                                    <label for="toggle-heart">❤</label>
+                                </a>
+
+                            {% endif %}
+                        {% endif %}
+                        <p class="mt-2">Likes: {{ likes_count }} <label for="toggle-heart">❤</label></p>
+                        </div>
+
+
+                        {% if recipe.can_delete %}
+                            <div class="buttons-container align-items-center">
+                                <a href="{% url 'edit recipe' recipe.pk %}"
+                                   class="btn btn-primary btn-lg rounded-pill mt-5">Edit</a>
+                                <a href="{% url 'delete recipe' recipe.pk %}"
+                                   class="btn btn-primary btn-lg rounded-pill mt-5">Delete</a>
+                            </div>
+                        {% endif %}
+
+                        <div class="card-footer">The recipe is created by: {{ recipe.created_by }}</div>
+                    {% endif %}
+            </div>
         </div>
     </div>
 

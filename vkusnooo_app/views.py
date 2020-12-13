@@ -164,25 +164,25 @@ def desserts(request):
 
 
 def meat_meals(request):
-    recipe = Recipe.objects.filter(type='Meat Meals')
+    recipes = Recipe.objects.filter(type='Meat Meals')
     context = {
-        'recipe': recipe,
+        'recipes': recipes,
     }
     return render(request, 'meals/meat.html', context)
 
 
 def meatless_meals(request):
-    recipe = Recipe.objects.filter(type='Meatless Meals')
+    recipes = Recipe.objects.filter(type='Meatless Meals')
     context = {
-        'recipe': recipe,
+        'recipes': recipes,
     }
     return render(request, 'meals/meatless.html', context)
 
 
 def other(request):
-    recipe = Recipe.objects.filter(type='Other')
+    recipes = Recipe.objects.filter(type='Other')
     context = {
-        'recipe': recipe,
+        'recipes': recipes,
     }
     return render(request, 'meals/other.html', context)
 
@@ -197,23 +197,22 @@ def pasta_dough(request):
 
 
 def vegan(request):
-    recipe = Recipe.objects.filter(type='Vegan')
+    recipes = Recipe.objects.filter(type='Vegan')
     context = {
-        'recipe': recipe,
+        'recipes': recipes,
     }
     return render(request, 'meals/vegan.html', context)
 
 
 def healthy(request):
-    recipe = Recipe.objects.filter(type='Healthy and Dietetic')
+    recipes = Recipe.objects.filter(type='Healthy and Dietetic')
     context = {
-        'recipe': recipe,
+        'recipes': recipes,
     }
     return render(request, 'meals/healthy.html', context)
 
 
 @login_required
-
 def like_recipe(request, pk):
     likes = Like.objects.filter(recipe_id=pk).all()
     user_like = likes.filter(user_id=request.user.userprofile.id).first()
@@ -230,28 +229,4 @@ def like_recipe(request, pk):
         like.save()
     return redirect('details recipe', pk)
 
-# @login_required
-# def like_recipe(request, pk):
-#     recipe = Recipe.objects.get(pk=pk)
-#     if recipe.user.user != request.user:
-#         # forbid
-#         pass
-#     if request.method == 'GET':
-#         like = Like.objects.filter(user_id=request.user.id, recipe_id=pk).first()
-#         context = {
-#             'form': RecipeForm(instance=recipe),
-#             'recipe': recipe,
-#             'like': like
-#         }
-#
-#         return render(request, 'details.html', context)
-#     if request.method == "POST":
-#         like = Like.objects.filter(user_id=request.user.id, recipe_id=pk).first()
-#         if like:
-#             like.delete()
-#         else:
-#             recipe = Recipe.objects.get(pk=pk)
-#             like = Like(value="Like", user=request.user.id)
-#             like.recipe = recipe
-#             like.save()
-#         return redirect('details recipe', pk)
+

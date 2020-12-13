@@ -10,9 +10,9 @@
 </head>
 <body>
 {% block site_content %}
-    <h1 class="masthead-subheading text-dark text-center">Some Other Recipes</h1>
+    <h1 class="masthead-subheading text-dark text-center">Other Recipes</h1>
     <div class="d-inline p-52 w-50 text-center align-content-center">
-        {% if not recipe %}
+         {% if not recipes %}
             <h3 class="masthead-subheading text-dark text-center">There are no recipes currently.
                 You can sign up/ in and share your favourite one!</h3>
         {% endif %}
@@ -21,11 +21,11 @@
 
     <div class="row">
         <div class="card-deck">
-            {% for rec in recipe %}
+            {% for recipe in recipes %}
                 <div class="card-group">
                     <div class="card" style="width: 23rem;">
-                        {% if rec.photo %}
-                            <img src="{{ rec.photo.url }}" style="width: 40%; height: 40%"
+                        {% if recipe.photo %}
+                            <img src="{{ recipe.photo.url }}" style="width: 40%; height: 40%"
                                  class="card-img-top img-fluid"
                                  alt="Recipe Photo">
                         {% else %}
@@ -35,41 +35,30 @@
                         {% endif %}
 
                         <div class="card-body">
-                            <h5 class="card-title">{{ rec.title }}</h5>
+                            <h5 class="card-title">{{ recipe.title }}</h5>
                             <p class="card-text"><img src="{% static 'img/cooking time.png' %}" width="40"
                                                       height="40"
                                                       class="d-inline-block align-top"> Time
-                                needed: {{ rec.time }} (min)
+                                needed: {{ recipe.time }} (min)
                             </p>
 
-                            <div class="card-footer">
-                                <small class="text-muted">Created By: {{ rec.created_by }}</small>
-                            </div>
-
-                            <a href="{% url 'details recipe' rec.id %}"
+                            <a href="{% url 'details recipe' recipe.id %}"
                                class="btn btn-primary btn-md rounded-pill mt-10">See
                                 Details</a>
-                            {% if can_like %}
-                                <input action="{% url 'like recipe' rec.id %}" id="toggle-heart" type="checkbox"/>
-                                <label for="toggle-heart">❤</label>
-                            {% else %}
-                                <input action="{% url 'like recipe' rec.id %}" id="toggle-heart" type="checkbox"/>
-                                <label for="toggle-heart">❤</label>
-
-                            {% endif %}
-                            <p class="small">Likes: {{ recipe.like_set.count }}</p>
                         </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Created By: {{ recipe.created_by }}</small>
+                            </div>
+
                     </div>
                 </div>
-
 
             {% endfor %}
         </div>
     </div>
 
-
     </body>
 
 {% endblock %}
 
-</body>
+

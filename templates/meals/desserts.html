@@ -11,9 +11,11 @@
 <body>
 
 {% block site_content %}
+
     <h1 class="masthead-subheading text-dark text-center">The Desserts</h1>
     <div class="d-inline p-52 w-50 text-center align-content-center">
-        {% if not recipes %}
+
+         {% if not recipes %}
             <h3 class="masthead-subheading text-dark text-center">There are no recipes currently.
                 You can sign up/ in and share your favourite one!</h3>
         {% endif %}
@@ -43,16 +45,17 @@
                                 needed: {{ recipe.time }} (min)
                             </p>
 
-                            <div class="card-footer">
-                                <small class="text-muted">Created By: {{ recipe.created_by }}</small>
-                            </div>
-
                             <a href="{% url 'details recipe' recipe.id %}"
                                class="btn btn-primary btn-md rounded-pill mt-10">See
                                 Details</a>
                         </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Created By: {{ recipe.created_by }}</small>
+                            </div>
+
                     </div>
                 </div>
+
             {% endfor %}
         </div>
     </div>

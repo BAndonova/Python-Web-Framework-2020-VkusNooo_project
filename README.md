@@ -6,3 +6,4 @@ The recipes are divided in different categories and respectively for every categ
 In terms of users, we have admin, not registered (authenticated users) and respectively registered users with authorization to create/ edit/delete recipes.
 I have used a ready/ free bootstrap template with ready css settings. Some of the css is also changed/ adjusted to serve the purpose/ layout.
 In terms of development - I would like to add comments and like options.
+This is the link to the deployed web site = http://vkusno.herokuapp.com/
